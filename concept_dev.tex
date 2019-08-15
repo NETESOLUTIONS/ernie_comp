@@ -23,41 +23,44 @@
 \section{Data and Methods} The following sections describe the datasets and initial data exploration 
 \subsection{Year slices} Year slices were developed for all publications from 1996-2018. All publications of language 'English' and with at-least 2 references and complete publication data in Scopus are selected. Publications type include (article, conference paper, dissertation etc) and belong to subject area 'COMP'. 
 %\vspace{-7mm}
+% latex table generated in R 3.5.1 by xtable 1.8-4 package
+% Thu Aug 15 14:13:47 2019
 \begin{table}[ht]
-\caption{Summary of base Scopus Analytical data set. The number of unique publications, unique references, total references . } 
+\caption{Summary of initial Scopus Analytical data set. The number of unique publications, unique references, total references . } 
 \label{tab:summary_data}
+\vspace{1mm}
 \centering
 \scalebox{0.7}{
-\begin{tabular}{|r  ccc |}
+\begin{tabular}{|r rrr r|}
   \hline
-Year & Unique Publications & Unique References  & Total References \\ 
+ & Year & Unique Publications & Unique References & Total References \\ 
   \hline
-1996 & 30,740 & 184,617 & 318,700 \\ 
-1997 &37,166 & 228,464 & 386,627 \\
-1998 & 44,764 & 250,491 & 438,908 \\
-1999 & 40,434 & 237,175 & 413,681 \\
-2000 & 44,636 & 261,393 & 460,310 \\
-2001 & 62,000 & 343,937 & 619,330 \\
-2002 & 71,645 & 394,882 &722,278 \\
-2003 & 83,676 & 438,498 & 849,950 \\
-2004 & 82,914 & 482,475 & 915,997 \\
-2005 & 107,905 & 591,784 & 1,193,198 \\
-2006 & 139,379 & 713,924 & 1,531,101 \\
-2007 & 170,396 & 829,444 & 1,830,944 \\
-2008 & 204,084 & 1,000,790 & 2,226,980 \\
-2009 & 239,113 & 1,222,312 & 2,790,194 \\
-2010 & 254,763 & 1,374,471 & 3,164,912 \\
-2011 & 255,144 & 1,519,064 & 3,419,719 \\
-2012 & 170,364 & 1,374,757 & 2,785,900 \\
-2013 & 195,008 & 1,606,955 & 3,353,390 \\
-2014 & 264,968 & 1,863,488 & 4,260,613 \\
-2015 & 297,534 & 2,037,838 & 4,762,036 \\
-2016 & 305,372 & 2,217,138 & 5,140,149 \\
-2017 & 291,481 & 2,349,259 & 5,262,725 \\
-2018 & 316,495 & 2,623,449 & 6,009,386 \\
- \hline
+1 & 1996 & 30783 & 185816 & 320533 \\ 
+  2 & 1997 & 37284 & 230475 & 389779 \\ 
+  3 & 1998 & 45198 & 254160 & 445703 \\ 
+  4 & 1999 & 40776 & 241013 & 420839 \\ 
+  5 & 2000 & 45310 & 266764 & 471079 \\ 
+  6 & 2001 & 65168 & 357472 & 651196 \\ 
+  7 & 2002 & 75583 & 410290 & 761714 \\ 
+  8 & 2003 & 88701 & 458459 & 904755 \\ 
+  9 & 2004 & 88984 & 506063 & 980388 \\ 
+  10 & 2005 & 110741 & 609294 & 1247543 \\ 
+  11 & 2006 & 140729 & 731622 & 1579690 \\ 
+  12 & 2007 & 171357 & 845569 & 1879419 \\ 
+  13 & 2008 & 205852 & 1019330 & 2281452 \\ 
+  14 & 2009 & 239905 & 1239406 & 2841795 \\ 
+  15 & 2010 & 255254 & 1391036 & 3214371 \\ 
+  16 & 2011 & 255633 & 1534865 & 3464829 \\ 
+  17 & 2012 & 264011 & 1700862 & 3845051 \\ 
+  18 & 2013 & 261442 & 1866133 & 4199482 \\ 
+  19 & 2014 & 272711 & 2004406 & 4581855 \\ 
+  20 & 2015 & 309446 & 2220732 & 5202960 \\ 
+  21 & 2016 & 316430 & 2422531 & 5630283 \\ 
+  22 & 2017 & 308102 & 2622125 & 5918274 \\ 
+  23 & 2018 & 340221 & 3012740 & 6960056 \\ 
+   \hline
 \end{tabular}}
-\vspace{-1mm}%Put here to reduce too much white space after your table 
+\vspace{-1mm}
 \end{table}
 
 \subsection{Disciplinary Composition} One way to identify the growth and diversity of a field is by considering the count and subject areas of scientific publications in it and how these change over time. In our study of the evolution of the field of computer science, we initially used the All Science Journal Classification (ASJC) codes assigned by Scopus to journals to crudely estimate publications and unique references from 1996-2018. Accordingly, we searched for articles or conference proceedings labelled computer science (COMP), one of the 27 major subject areas in the Scopus classification system. ICOMP itself comprises 13 minor subject areas such as Hardware and Architecture and Artificial Intelligence. A limitation of the ASJC system is that every publication inherits its journal or conference subject area(s), which is problematic for a field that has had broad influence and interactions on other fields. Further, multidisciplinary journals such as Nature, Science, Proceedings of the National Academy of Sciences are classified under General and computer science articles published in those journals would be overlooked. Thus, we followed an initial subsetting of Scopus using COMP and GENERAL with an article level clustering approach. :
