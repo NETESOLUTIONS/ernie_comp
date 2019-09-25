@@ -18,17 +18,17 @@
 
 \begin{document}
 \maketitle
-\section{Motivation} Making discovery in a manner that would leverage existing resources and skills with focus on  the computer science field, which has experienced vigorous growth in the last twenty years. Citation analysis is a particular focus. 
+\section{Motivation} The field of computer science has experienced vigorous growth in the last twenty years that has also impacted other fields. Citation analysis is the major avenue down which we choose to explore this growth and diversification.
 
-\section{Data and Methods} The following sections describe the datasets and initial data exploration 
-\subsection{Year slices} Year slices were developed for all publications from 1996-2018. All publications of language 'English' and with at-least 2 references and complete publication data in Scopus are selected. Publications type include (article, conference paper, dissertation etc) and belong to subject area 'COMP'. 
+\section{Data and Methods} The following sections describe datasets and initial explorations.
+\subsection{Year slices} Year slices were developed for all publications from 1996-2018. All publications of language `English', with at-least 2 references and a complete publication record in Scopus are selected. Publications type include (article, conference paper, dissertation etc) and belong to subject area 'COMP'. 
 %\vspace{-7mm}
 % latex table generated in R 3.5.1 by xtable 1.8-4 package
 % Thu Aug 15 14:13:47 2019
 \begin{table}[ht]
 \caption{Summary of initial Scopus Analytical data set. The number of unique publications, unique references, total references . } 
 \label{tab:summary_data}
-\vspace{1mm}
+\vspace{3 mm}
 \centering
 \scalebox{0.7}{
 \begin{tabular}{|r rrr r|}
@@ -63,7 +63,30 @@
 \vspace{-1mm}
 \end{table}
 
-\subsection{Disciplinary Composition} One way to identify the growth and diversity of a field is by considering the count and subject areas of scientific publications in it and how these change over time. In our study of the evolution of the field of computer science, we initially used the All Science Journal Classification (ASJC) codes assigned by Scopus to journals to crudely estimate publications and unique references from 1996-2018. Accordingly, we searched for articles or conference proceedings labelled computer science (COMP), one of the 27 major subject areas in the Scopus classification system. ICOMP itself comprises 13 minor subject areas such as Hardware and Architecture and Artificial Intelligence. A limitation of the ASJC system is that every publication inherits its journal or conference subject area(s), which is problematic for a field that has had broad influence and interactions on other fields. Further, multidisciplinary journals such as Nature, Science, Proceedings of the National Academy of Sciences are classified under General and computer science articles published in those journals would be overlooked. Thus, we followed an initial subsetting of Scopus using COMP and GENERAL with an article level clustering approach. :
+\subsection{Disciplinary Composition} One way to identify the growth and diversity of a field is by considering the count and subject areas of scientific publications in it and how these change over time. In our study of the evolution of the field of computer science, we initially used the All Science Journal Classification (ASJC) codes in Scopus to journals to estimate relevant publications and their cited references from 1996-2018. Accordingly, we searched for articles or conference proceedings labelled computer science (COMP), one of the 27 major subject areas in the Scopus classification system. It should be noted that COMP itself comprises 13 minor subject areas such as Hardware and Architecture and Artificial Intelligence. A limitation of the ASJC system is that publications inherit ASJC codes code from those assigned to their parent journal or conferences.  Further, multidisciplinary journals such as Nature, Science, Proceedings of the National Academy of Sciences are classified under General and computer science articles published in those journals could be overlooked. The extend of both false positives (publications that are not computer science but have COMP labels) and false negatives (publications that are computer science but do not have COMP labels) must, therefore, be considered when engaging in such studies. We chose to refine an initial subsetting of Scopus by restricting to COMP and GENERAL and then refining the results in through article level clustering using citations to form clusters. A second approach involves mining the dblp repository assuming that it contains a validated set of computer science publications from journals and conference proceedings. Publications so mined are matched to Scopus identifiers and further analyzed. 
+
+\subsection{Possible next steps(based on discussion)}  
+
+\begin{itemize}
+\item Expt 1: Use dblp as input to Scopus instead of Scopus\_COMP (super idea from Sitaram)
+\begin{enumerate}
+\item Match dblp titles to Scopus titles using (insert full text search syntax) using a stringent rankfilter cut off $> 0.99$ for matching to Scopus 
+\item Get cited references using Scopus ids from matched titles and construct an undirected citation graph
+\item Cluster with Graclus into 30 clusters
+\item Get Topics of Prominence (TOP) counts for articles in these clusters 
+\item Vary rankfilter cutoff
+\item Vary cluster number
+\end{enumerate}
+\end{itemize}
+
+Expt 2: Reduce Graclus and Leiden clusters to top tenth percentile of cited articles
+• Use total citations from Scopus for citation counts
+• Get TOP counts for these publications
+Expt 3: George will keep fiddling with Sitaram's previously generated data to extract insight.
+
+
+
+
 
 \begin{description}
 \item[$\bullet$ ] NSF follows a single subject area for journals which can be used for publication level classification.
@@ -73,5 +96,4 @@
 \item[$\bullet$ ] Obtain top conferences/journals in COMP field and analyze their citation patterns. (Assuming they contain articles related to single discipline)
 \end{description}
 
-\subsection{Possible next steps(based on discussion)}  Analyze the citation patterns of top authors in the field and how it evolved over time. Selecting authors with at least 30 papers published might be a good place to start. Another experiment might be to approach the diversity of computer science from other disciplines. i.e studying the citation patterns of other disciplines and how computer science has been more inclusive over time.
 \end{document}  
