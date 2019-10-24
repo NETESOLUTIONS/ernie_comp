@@ -106,9 +106,38 @@ Computer science and its applications has experienced dramatic growth and divers
 
 Cite Alan Porter on expanding universe versus myopic focus. Cite Traag, Waltman, Lariviere papers. Peter Sjögårde and Per Ahlgren, Loet Leydesdorff, Caroline S. Wagner and Lutz Bornmann, Discontinuities in citation relations among journals: self-organized criticality as a model of scientific revolutions and change, Scientometrics, 10.1007/s11192-018-2734-6, 116, 1, (623-644), (2018). Antonio Perianes-Rodriguez and Javier Ruiz-Castillo, A comparison of the Web of Science and publication-level classification systems of science, Journal of Informetrics, 10.1016/j.joi.2016.10.007, 11, 1, (32-45), (2017). Qi Wang and Ludo Waltman, Large-scale analysis of the accuracy of the journal classification systems of Web of Science and Scopus, Journal of Informetrics, 10.1016/j.joi.2016.02.003, 10, 2, (347-364), (2016). Henry Small, Kevin W. Boyack and Richard Klavans, Identifying emerging topics in science and technology, 
 Crossref
-\section{Section title}
+\section{Materials and Methods}
 \label{sec:1}
 Text with citations \cite{RefB} and \cite{RefJ}.
+
+\section{Results}
+\label{sec:2}
+
+Overall strategy:
+
+\begin{itemize}
+\item Spectral clustering
+\begin{enumerate}
+\item Subset Scopus by COMP
+\item Match COMP to dblp at high stringency -> reduced number of scps
+ \item Harvest cited refefences  from Scopus
+ \item Cluster articles by direct citation using Graclus to a number that meets simple optimality criteria and does not impose cognitive challenges
+ \item Reconcile cluster contents to journal classification for the purpose of referencing
+ \item Infer inter-cluster relationships using direct citations, co-citations, and bibliographic coupling
+\end{enumerate}
+\item Co-citation based clustering
+\begin{enumerate}
+\item Stratify by year after subsetting by COMP and restricting to article and cp only
+\item Apply fractional citation counting and identify highly-cited papers
+\item Calculate normalized co-citations
+\item Cluster by variable clustering method of Small
+\item Evaluate major co-cited pairs
+\end{enumerate}
+\end{itemize}
+
+
+Text with citations \cite{RefB} and \cite{RefJ}.
+
 \subsection{Subsection title}
 \label{sec:2}
 as required. Don't forget to give each section
