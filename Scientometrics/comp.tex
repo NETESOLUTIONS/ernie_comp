@@ -145,8 +145,18 @@ We sought to extend the work of Salton and Bergmark to reflect a more current re
 
 \subsection{Clustering methods}
 
-\paragraph{Clustering by Direct Citation} Graclus is a spectral graph clustering package that computes normalized cut and ratio association for a given undirected graph~\cite{graclus_2007}.  We used v1.2 in our experiments.
-The \emph{comp} dataset was formatted as an undirected graph, stored in a file with a header line indicating the number of nodes and edges, and used as input to Graclus. We varied the number of clusters to be formed between 10 and 50 clusters. At 20 clusters, the most evenly sized set of clusters resulted with the largest cluster containing roughly 10 times the number of nodes in the smallest one~\cite{traag_louvain_2019}. Consequently, we generated 20 clusters, labeled 0-19, using Graclus (Fig~\ref{fig:heatmap}). The quality of clustering was evaluated by measuring conductance [add citations] as defined by Shun.
+\paragraph{Clustering by Direct Citation} Graclus is a spectral graph clustering package that computes normalized cut and ratio association for a given undirected graph~\cite{graclus_2007}.  We used v1.2 in our experiments. The \emph{comp} dataset was formatted as an undirected graph, stored in a file with a header line indicating the number of nodes and edges, and used as input to Graclus, which requires the number of clusters to be formed as an input parameter. In preliminary experiments, we varied the number of clusters to be formed between 10 and 50 clusters (data not shown).  At 20 clusters, the most evenly sized set of clusters resulted with the largest cluster containing roughly 10 times the number of nodes in the smallest one~\cite{traag_louvain_2019}.  Consequently, we generated 20 clusters, labeled 0-19, using Graclus (Fig~\ref{fig:heatmap}). The quality of clustering was evaluated by measuring conductance as defined in Shun et al.~\cite{shun_parallel_2016}. Data in \emph{comp} were clustered into 18, 20, or 22 clusters and in each case the last cluster (17, 19, 21) had the highest conductance value and the smallest number of nodes suggesting that it effectively served as a container for `left over publications' during the Graclus process. Thus, we did not consider cluster 19 (the 20th cluster) when interpreting our results.  The remaining 19 clusters had conductance values ranging from 0.09 to 0.25 with a median conductance of 0.15.
+
+ \begin{figure}[ht]
+\centering
+% Use the relevant command to insert your figure file.
+% For example, with the graphicx package use
+  \includegraphics[scale=0.3]{graclus_comparison.pdf}
+% figure caption is below the figure
+\caption{Summary of DBLP data cross-matched with Scopus. 2,685,356 publications from DBLP were cross-matched with Scopus and then grouped by the 27 major subject areas in the ASJC (Scopus) classification. The largest number of publications are contributed by Computer Science; Mathematics; and Engineering and then by Social Sciences; Physics and Astronomy; and Biochemistry, Genetics, and Molecular Biology. Publications were further annotated with respect to being either articles \emph{(ar)} or conference proceedings \emph{(cp)}. For this dataset, the major subject areas of Computer Science; Engineering; and Mathematics contributed the most publications while Pharmacology, Toxicology, and Pharmaceutics; Nursing, Veterinary and Dentistry contributed the least.}
+\label{fig:graclus_comparison}       % Give a unique label
+\end{figure}
+
 
 \begin{table}
 % table caption is above the table
@@ -155,7 +165,7 @@ The \emph{comp} dataset was formatted as an undirected graph, stored in a file w
 % For LaTeX tables use
 \begin{tabular}{lllll}
 \hline\noalign{\smallskip}
-Cluster & Publications & Conductance & ASJC Labels & Unique Labels\\
+Cluster & Publications & Conductance & Total ASJC Labels & Unique ASJC Labels\\
 \noalign{\smallskip}\hline\noalign{\smallskip}
 0 & 111,294 & 0.12 & 265,664 & 142 \\ 
 1 & 117,057 & 0.14 & 246,960 & 166 \\ 
@@ -199,17 +209,21 @@ Agglomerative clustering was then performed on these clusters to generate higher
 \caption{caption will be inserted I just haven't been able to overcome the threshold to avoid boring tasks}
 \label{fig:heatmap}       % Give a unique label
 \end{figure}
+
 For the purpose of this study, our working definition of the computer science literature was all publications in the DBLP bibliography published in the years 1996-2015, that had (i) a digital object identifier (DOI), and (ii) could also be matched to article identifiers in the Scopus bibliography. The process of selection and matching resulted in a dataset of 2,685,356 publications (Materials and Methods). 
 
 [Need justification for why 20 article level clusters- may be in Waltman's article]
 
 Clustering of publications is commonly accomplished through direct citation, bibliographic coupling, and co-citation with an argument being made for direct citation as the best approach to concentrate citation links~\cite{klavans_which_2017}. Accordingly, we first used direct citation links as the basis for cluster formation. A set of 20 clusters was generated using Graclus, a spectral clustering technique that has previously been applied to citation data~\cite{graclus_2007,subelj_clustering_2016}. We constructed article level clusters of this computer science dataset at a sufficiently high level of aggregation to avoid cognitive challenge and cross-matched them to disciplinary classification by journal, the Scopus ASJC classification. We considered Scopus ASJC minor subject area categories that accounted for at least 10\% of the publications in each cluster and observed 31 of the 334 ASJC minor subject areas, suggesting some selectivity in these results.  
 
+
 (Fig~\ref{fig:heatmap}) permits examination of these data from two perspectives (i) the clusters that map to a given ASJC minor subject area (ii) ASJC minor subject areas that comprised at least 10\% of the publication in a cluster. Unsurprisingly, the broad category Computer Science Applications was present in 16 of 20 clusters, followed by Software in 12 clusters, and Electrical and Electronic Engineering in 10 clusters.
 
 From the other perspective, cluster 17 was the most diverse and contained publications annotated with 8 minor subject area labels, of which Biochemistry, Chemistry(all), Genetics, and Molecular Biology were the most distant from computer science while Statistics \& Probability, Computational Theory \& Mathematics, and Computational Mathematics are closer. It is important to be reminded of the caveats associated with (i) the limitations of the DBLP dataset (ii) the limitations of cross-matching to Scopus (iii) the limitations of journal based classification (iv) the limitations of clustering by direct citation. Even so, a picture that emerges is that areas central to computer science in 2019 are more likely to be found in multiple clusters (hardware, software, and theory) and that biology, chemistry, and statistics are proximal.  These results strongly suggest that the actual structure of communication within the broad field of computer science may be at variance with journal-based classification, also noted by Waltman and van Eck, ``...an indication that traditional disciplines such as those just mentioned only partly reflect the actual organization of today's scientific research."~\cite{waltman_new_2012}. The aphorism of Porter, Cohen, Roessner, and Perreault (2007), `The discrepancies between disciplinary roots and research realities loom large'~\cite{porter_measuring_2007} also invokes itself. A second inference is that a correlation appears between broad journal-based classification and article clusters in terms of subject matter. Thirdly, that some areas of computer science are relatively ubiquitous. Fourth that interactions with fields outside computer science are restricted to a single cluster or small numbers of clusters. 
 
 We also attempted to map these 20 clusters assembled through direct citation to the CCS classification by manually matching the top 25-50 most heavily cited publications in each cluster to corresponding categories in the CCS. This was feasible in some cases, clusters 0 and 1 mapped reasonably well to the top level categories Hardware and Computer Systems Organization but less so in the cases of other clusters. Further, the top cited papers often derived from biology and we were concerned that this small sample (top cited papers) were not representative of the cluster. 
+
+Co-citation, the frequency with which a pair of articles is cited by other articles, was first described independently by Small and Marshakova in 1973~\cite{small_co-citation_1973,marshakova-shaikevich_co-citation_1973} provides insight into the emergence of new ideas derived from the association of previously independent ones. Co-citation, thus provides some degree of evolutionary insight across disciplines and sub-disciplines and has been used for clustering publications~\cite{boyack_co-citation_2010,boyack_improving_2013,small_structure_1974,small_clustering_1985}. To provide an alternate view of these DBLP data we also constructed clusters using co-citation as below and as described in Methods.  
 
 \begin{figure}[ht]
 \centering
@@ -221,7 +235,7 @@ We also attempted to map these 20 clusters assembled through direct citation to 
 \label{vlc_process}       % Give a unique label
 \end{figure}
 
-\noindent
+%\noindent
 Co-citation based clustering:
 \begin{enumerate}
 \item Stratify by year after subsetting by COMP and restricting to article and cp only
@@ -230,6 +244,16 @@ Co-citation based clustering:
 \item Cluster by variable clustering method of Small
 \item Evaluate major co-cited pairs
 \end{enumerate}
+
+ \begin{figure}[ht]
+\centering
+% Use the relevant command to insert your figure file.
+% For example, with the graphicx package use
+  \includegraphics[scale=0.3]{cocitr2_venn.pdf}
+% figure caption is below the figure
+\caption{Summary of DBLP data cross-matched with Scopus. 2,685,356 publications from DBLP were cross-matched with Scopus and then grouped by the 27 major subject areas in the ASJC (Scopus) classification. The largest number of publications are contributed by Computer Science; Mathematics; and Engineering and then by Social Sciences; Physics and Astronomy; and Biochemistry, Genetics, and Molecular Biology. Publications were further annotated with respect to being either articles \emph{(ar)} or conference proceedings \emph{(cp)}. For this dataset, the major subject areas of Computer Science; Engineering; and Mathematics contributed the most publications while Pharmacology, Toxicology, and Pharmaceutics; Nursing, Veterinary and Dentistry contributed the least.}
+\label{fig:cocitr_venn2}       % Give a unique label
+\end{figure}
 
 
 \emph{need to cite Granovetter somewhere for definition of strong and weak ties that Small refers to}
