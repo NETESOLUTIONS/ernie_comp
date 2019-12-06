@@ -155,7 +155,7 @@ The data in \emph{comp} were clustered into 18, 20, or 22 clusters and in each c
 \centering
 % Use the relevant command to insert your figure file.
 % For example, with the graphicx package use
-  \includegraphics[scale=0.3]{graclus_comparison.pdf}
+  \includegraphics[scale=0.5]{graclus_comparison.pdf}
 % figure caption is below the figure
 \caption{Summary of DBLP data cross-matched with Scopus. 2,685,356 publications from DBLP were cross-matched with Scopus and then grouped by the 27 major subject areas in the ASJC (Scopus) classification. The largest number of publications are contributed by Computer Science; Mathematics; and Engineering and then by Social Sciences; Physics and Astronomy; and Biochemistry, Genetics, and Molecular Biology. Publications were further annotated with respect to being either articles \emph{(ar)} or conference proceedings \emph{(cp)}. For this dataset, the major subject areas of Computer Science; Engineering; and Mathematics contributed the most publications while Pharmacology, Toxicology, and Pharmaceutics; Nursing, Veterinary and Dentistry contributed the least.}
 \label{fig:graclus_comparison}       % Give a unique label
@@ -164,10 +164,11 @@ The data in \emph{comp} were clustered into 18, 20, or 22 clusters and in each c
 
 \begin{table}
 % table caption is above the table
-\caption{\emph{2685021 is because of inner joins on ASJC Explain conductance calculations~\cite{shun_parallel_2016}}}
+\caption{\emph{Statistics regarding the 20 clusters produced using direct citation.
+2685021 is because of inner joins on ASJC Explain conductance calculations~\cite{shun_parallel_2016}}}
 \label{tab:1}       % Give a unique label
 % For LaTeX tables use
-\begin{tabular}{lllll}
+\begin{tabular}{lrccc}
 \hline\noalign{\smallskip}
 Cluster & Publications & Conductance & Total ASJC Labels & Unique ASJC Labels\\
 \noalign{\smallskip}\hline\noalign{\smallskip}
@@ -197,8 +198,8 @@ Cluster & Publications & Conductance & Total ASJC Labels & Unique ASJC Labels\\
 \paragraph{Clustering by Co-Citation} 
 Co-citation, the frequency with which a pair of articles is cited by other articles,  first described independently by Small and Marshakova in 1973~\cite{small_co-citation_1973,marshakova-shaikevich_co-citation_1973},
 provides insight into the emergence of new ideas derived from the association of previously independent ones. 
-Co-citation, thus provides some degree of evolutionary insight across disciplines and sub-disciplines and has been used for clustering publications~\cite{boyack_cocitation_2010,boyack_improving_2013,small_structure_1974,small_clustering_1985}. 
-For an alternate view of these DBLP data we constructed clusters using co-citation, using a modification of   variable level clustering to the 2,685,356 articles in \emph{comp} and then performing top-down agglomerative clustering on the resultant 10,298 (of 22,232 clusters) containing greater than two nodes per cluster. (Methods). 
+Co-citation thus provides some degree of evolutionary insight across disciplines and sub-disciplines and has been used for clustering publications~\cite{boyack_cocitation_2010,boyack_improving_2013,small_structure_1974,small_clustering_1985}. 
+For an alternate view of these DBLP data we constructed clusters using co-citation, using a modification of   variable level clustering to the 2,685,356 articles in \emph{comp} and then performing top-down agglomerative clustering on the resultant 10,298 (of 22,232 clusters) containing greater than two nodes per cluster.  
 
 We used variable level clustering, an approach developed in 1985 by Small and Sweeney~\cite{small_clustering_1985}, with minor modifications as follows. Variable level clustering involves applying a threshold (below which all edges in a graph are deleted) then iteratively selecting edges with the highest normalized co-citation value and extracting connected components from the graph as clusters for each edge in turn. Three parameters are needed: (i) a threshold or starting level based on a quantile of normalized co-citation frequency, (ii) a level increment, and (iii) a maximum cluster size. An issue is the generation of very large clusters by chaining through low edge weights.  Thus, at each iteration, any cluster exceeding the maximum cluster size  is returned to the process and a higher threshold is applied to break such clusters.
 
@@ -210,11 +211,12 @@ Using this approach, 22,232 clusters containing 84,591 nodes were generated, eac
 Agglomerative clustering was then performed on these 10,298 clusters to generate higher-order clusters. Briefly, each cluster was now treated as a node and the edge weight between two clusters was assigned to the maximum edge weight of all edges between the nodes in these two clusters. Edges were arranged in descending order. The first pair of clusters were merged and its edge weight with other interacting clusters was recalculated. All edges were then re-ordered as before and the next pair of clusters was merged. The process was halted after 600 rounds to prevent single large clusters being generated (Fig.~\ref{fig:merge_select}).
 
 \begin{figure}[ht]
+\centering
 % Use the relevant command to insert your figure file.
 % For example, with the graphicx package use
   \includegraphics[scale=0.5]{merge_select.pdf}
 % figure caption is below the figure
-\caption{Clustering produced using co-citation. }
+\caption{Clustering produced using co-citation data; the y-axis is the cluster size (given logarithmically), and the x-axis is the number of iterations of the agglomerative clustering technique. Note that iterating more than 600 times produces a very large cluster.  }
 \label{fig:merge_select}       % Give a unique label
 \end{figure}
 
@@ -224,9 +226,12 @@ Agglomerative clustering was then performed on these 10,298 clusters to generate
 \begin{figure}[ht]
 % Use the relevant command to insert your figure file.
 % For example, with the graphicx package use
-  \includegraphics[scale=0.5]{scopus_dblp_graclus3.pdf}
+  \includegraphics[scale=0.45]{scopus_dblp_graclus3.pdf}
 % figure caption is below the figure
-\caption{Clustering obtained by direct citation.}
+\caption{Heat map for the clustering obtained by direct citation. The  y-axis (rows) correspond to topics, defined by Scopus characterizations, and the
+x-axis (columns) represent the 20 different clusters.  
+Each cluster is characterized by topics that label at least 10\% of the publications in the cluster.
+ }
 \label{fig:heatmap}       % Give a unique label
 \end{figure}
 
@@ -266,7 +271,7 @@ so papers are related by the communities they impact (co-citation clustering).
 % For example, with the graphicx package use
   \includegraphics[scale=0.25]{vlc.pdf}
 % figure caption is below the figure
-\caption{Schematic representation of variable clustering protocol modified from Small and Sweeney (1985). Three parameters are specified (i) a threshold or starting level based on a quantile of normalized co-citation frequency (ii) a level increment (iii) a maximum cluster size. Input data is a set of co-cited publications with edge-weight defined by normalized co-citation frequencies. Green clusters are within the max cluster size. At the initial threshold, $t1$, a single cluster below the maximum cluster size, $mcs$ (green), along with one large cluster above it (red) are generated. As the threshold is incremented to $t2$, additional clusters of acceptable size is generated. The cascade continues to completion, which is defined by all clusters being of size less than or equal to the $mcs$. In this schematic, five rounds are adequate for the process to run to completion.}
+\caption{Schematic representation of variable clustering protocol modified from Small and Sweeney (1985) \cite{small_clustering_1985}. Three parameters are specified: (i) a threshold or starting level based on a quantile of normalized co-citation frequency, (ii) a level increment, and  (iii) a maximum cluster size. Input data is a set of co-cited publications with edge-weight defined by normalized co-citation frequencies. Green clusters are within the max cluster size. At the initial threshold, $t1$, a single cluster below the maximum cluster size, $mcs$ (green), along with one large cluster above it (red) are generated. As the threshold is incremented to $t2$, additional clusters of acceptable size is generated. The cascade continues to completion, which is defined by all clusters being of size less than or equal to the $mcs$. In this schematic, five rounds are adequate for the process to run to completion.}
 \label{vlc_process}       % Give a unique label
 \end{figure}
 
@@ -286,7 +291,9 @@ Co-citation based clustering:
 % For example, with the graphicx package use
  \includegraphics[scale=0.5]{cocit_venn2.pdf}
 % figure caption is below the figure
-\caption{High Level Disciplinary Composition of Publications in Clusters Generate by Variable Level Clustering. 84,591 nodes from were matched to the 4 subject areas, 
+\caption{High-level disciplinary composition of publications in $\sim$2,000 clusters generated by variable-level clustering  of co-citation data.
+%Variable Level Clustering. 
+84,591 nodes from were matched to the 4 subject areas, 
 27 major subject areas, and 334 minor subject areas in the Scopus ASJC classification. Since 82.5\% of these nodes were assigned more to than one minor subject category, 
 we assigned fractional counts for the four subject areas that summed to 1 for each article. The figure shows a four way Venn Diagram~\cite{chen_venn_2011} illustrating the 
 relative frequencies of publications from the Physical Sciences, Social Sciences, Life Sciences, and Health Sciences.}
