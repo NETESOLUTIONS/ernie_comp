@@ -132,13 +132,12 @@ In this study, we sought to extend the work of Salton and Bergmark to reflect a 
 \subsection{Data}
  A stable release of the DBLP computer science bibliography~\cite{dblp_ref} consisting of 7,079,994 records was downloaded as dblp-2018-08-01.xml.gz. Publications were parsed from the xml source file and loaded into a PostgreSQL database. We have previously parsed the Scopus dataset of over 72,000,000 publications into a custom schema as part of a larger data platform for research evaluation~\cite{GithubERNIE2019}. Records in the DBLP dataset were matched to Scopus identifiers using digital object identifiers (DOIs). This procedure resulted in a dataset of 2,685,356 DBLP publications with Scopus identifiers where 1,278,322 (47.6\%) were labeled as article and 1,407,034 (52.4\%) as conference proceedings. References cited by these publications were then extracted from Scopus (7,129,006), resulting in a total of 8,000,411 nodes (publications and references) and  44,296,381 edges that represent citations within the dataset. This dataset is referred to as \emph{comp} (see Fig~\ref{fig:ar_cp_annotation}).
  
- \begin{figure}[ht]
-\centering
+\begin{figure}[ht]
 % Use the relevant command to insert your figure file.
 % For example, with the graphicx package use
-  \includegraphics[scale=0.5]{ar_cp_ratio.pdf}
+  \includegraphics[scale=0.6]{ar_cp_ratio.pdf}
 % figure caption is below the figure
-\caption{Summary of DBLP data cross-matched with Scopus. 2,685,356 publications from DBLP were cross-matched with Scopus and then grouped by the 27 major subject areas in the ASJC (Scopus) classification. The largest number of publications are contributed by Computer Science; Mathematics; and Engineering and then by Social Sciences; Physics and Astronomy; and Biochemistry, Genetics, and Molecular Biology. Publications were further annotated with respect to being either articles \emph{(ar)} or conference proceedings \emph{(cp)}. For this dataset, the major subject area of Computer Science (1,194,623(cp), 879,396 (ar) contributed the most publications while Nursing (69 cp,  756 ar) contributed the least.}
+\caption{Summary of DBLP data cross-matched with Scopus. 2,685,356 publications from DBLP were cross-matched with Scopus and then grouped by the 27 major subject areas in the ASJC (Scopus) classification. The largest number of publications are contributed by Computer Science; Mathematics; and Engineering and then by Social Sciences; Physics and Astronomy; and Biochemistry, Genetics, and Molecular Biology. Publications were further annotated with respect to being either articles \emph{(ar)} or conference proceedings \emph{(cp)}. For this dataset, the major subject area of Computer Science with 1,194,623(cp) \& 879,396 contributed the most publications while Nursing with 69 (cp) \& 756 (ar)) contributed the least.}
 \label{fig:ar_cp_annotation}       % Give a unique label
 \end{figure}
 
