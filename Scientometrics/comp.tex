@@ -94,7 +94,7 @@ grestorew
            \and
            George Chacko \at
               Netelabs, NET ESolutions Corporation, McLean, VA \\
-              \email{netelabs@nete.com}
+              \email{netelabs@nwete.com}
 }
 
 \date{Received: date / Accepted: date}
@@ -120,7 +120,7 @@ Noting that that the scientific literature serves a rich source of information t
 
 Progressing beyond 1974-79, and Salton and Bergmark's historical triad of theoretical foundations; hardware and computer systems; and software, the Computing Classification System (CCS)~\cite{acm_ref} published by the Association for Computing Machinery now consists of 13 top-level areas that reflect a more current view of the field. This classification also addresses relationships with other fields under the category of Applied Computing. However, an easy way to map scientific publications, especially interdisciplinary articles or those from fields proximal to the CCS classification does not exist. 
 
-Other classification systems are available such as the All Science Journal Classification (ASJC) developed and maintained by Scopus, the Web of Science research and categorical classifications from Clarivate Analytics, and the NSF classification system~\cite{nsf_classification}. All three rely on applying one or more journal-derived labels to articles.  Of these, Scopus and the Web of Science also include global bibliographies with citation links and proprietary unique identifiers for publications, some of which can be matched to digital object identifiers (DOIs). Applying labels designed to represent journals, to articles, can be problematic in terms of accuracy given broad scope in some journals,  and also because fields evolve faster than their journal classifications. [should we put in a comment about why article level labels provided by authors have limited use and that enforcement of controlled vocabularies varies by publisher?] Shu and colleagues recently noted in a comparative study of the Chinese Science Citation Database (CSCD) and the Web of Science, that 46\% of articles did not belong to the discipline of the journal they were published in~\cite{shu_comparing_2019}. Others have also discussed and critiqued disciplinary assignments using journal based classifications~\cite{wang_large-scale_2016,perianes-rodriguez_comparison_2017} \textcolor{blue}{need comprehensive list of citations}. Article classification systems have been constructed, however, which escape some of the criticisms of journal-based classification~\cite{traag_louvain_2019,boyack_classification_2014,waltman_new_2012} but seem to be in the research domain rather than the domain of practical use [need to check on this].[May need a nother bridging sentence to the next paragraph].
+Other classification systems are available such as the All Science Journal Classification (ASJC) developed and maintained by Scopus, the Web of Science research and categorical classifications from Clarivate Analytics, and the NSF classification system~\cite{nsf_classification}. All three rely on applying one or more journal-derived labels to articles.  Of these, Scopus and the Web of Science also include global bibliographies with citation links and proprietary unique identifiers for publications, some of which can be matched to digital object identifiers (DOIs). Applying labels designed to represent journals, to articles, can be problematic in terms of accuracy given broad scope in some journals,  and also because fields evolve faster than their journal classifications. [should we put in a comment about why article level labels provided by authors have limited use and that enforcement of controlled vocabularies varies by publisher?] Shu and colleagues recently noted in a comparative study of the Chinese Science Citation Database (CSCD) and the Web of Science, that 46\% of articles did not belong to the discipline of the journal they were published in~\cite{shu_comparing_2019}. Others have also discussed and critiqued disciplinary assignments using journal based classifications~\cite{wang_large-scale_2016,perianes-rodriguez_comparison_2017}. Article classification systems have been constructed, however, which escape some of the criticisms of journal-based classification~\cite{traag_louvain_2019,boyack_classification_2014,waltman_new_2012} but seem to be in the research domain rather than the domain of practical use [need to check on this].[May need another bridging sentence to the next paragraph].
  
 In this study, we sought to extend the work of Salton and Bergmark to describe current trends while considering connections between computer science and other fields. As a source of computer science literature, we used DBLP, a reference bibliography for computer science~\cite{dblp_ref}. The DBLP bibliography covers publications from computer science and includes publications from hybrid fields, where they are considered pertinent to computer science research. The underlying assumption we made is that records in DBLP are greatly enriched for computer science even while recognizing that coverage may be incomplete and possibly biased. Cross-matching DBLP publications to records in the Scopus, abstract and citation database of peer-reviewed literature, enabled us to harvest the richer links in Scopus as well as extract links to publications from other disciplines. This cross-matching also allows the use of both journal and article based classifications when clustering documents. Using both direct citations and co-citations as the basis for clustering, we used DBLP articles from journals and conference proceedings for the period 1996-2015. We reconciled these clusters with the All Science Journal Classification (ASJC) developed and maintained by Scopus through a combination of automated and manual procedures. We describe below the high-level interactions of computer science within the Physical Sciences as well as with the Social Sciences and Life Sciences. [What did we find? Some kind of preview sentence!].
 
@@ -128,7 +128,7 @@ In this study, we sought to extend the work of Salton and Bergmark to describe c
 \label{sec:methods}
 
 \subsection{Data}
- A stable release of the DBLP computer science bibliography~\cite{dblp_ref} consisting of 7,079,994 records was downloaded as dblp-2018-08-01.xml.gz. Publications were parsed from the XML source file and loaded into a PostgreSQL database. We have previously parsed the Scopus dataset of over 72,000,000 publications into a custom schema as part of implementing a larger data platform for research evaluation~\cite{GithubERNIE2019}. Records in the DBLP dataset were matched to Scopus identifiers using digital object identifiers (DOIs). This procedure resulted in a dataset of 2,685,356 DBLP publications with Scopus identifiers where 1,278,322 (47.6\%) were labeled as article and 1,407,034 (52.4\%) as conference proceedings. References cited by these publications were then extracted from Scopus (7,129,006 records), resulting in a total of 8,000,411 nodes (publications and references) and 44,296,381 edges that represent citations within the dataset. This dataset is referred to as \emph{comp} (see Fig~\ref{fig:ar_cp_annotation}).
+ A stable release of the DBLP computer science bibliography~\cite{dblp_ref} consisting of 7,079,994 records was downloaded as dblp-2018-08-01.xml.gz. Publications were parsed from the XML source file and loaded into a PostgreSQL database. Just over 95\% of the publications within were published after 1996. We have previously parsed the Scopus dataset of over 72,000,000 publications into a custom schema as part of implementing a larger data platform for research evaluation~\cite{GithubERNIE2019}. Records in the DBLP dataset were matched to Scopus identifiers using digital object identifiers (DOIs). This procedure resulted in a dataset of 2,685,356 DBLP publications with Scopus identifiers where 1,278,322 (47.6\%) were labeled as article and 1,407,034 (52.4\%) as conference proceedings. References cited by these publications were then extracted from Scopus (7,129,006 records), resulting in a total of 8,000,411 nodes (publications and references) and 44,296,381 edges that represent citations within the dataset. This dataset is referred to as \emph{comp} (see Fig~\ref{fig:ar_cp_annotation}).
  
 \subsection{Clustering methods}
 
@@ -142,11 +142,11 @@ For an alternate view of these DBLP data we constructed clusters using co-citati
 
 To cluster by co-citation, we used a modification of variable level clustering combined with agglomerative clustering, an approach developed in 1985 by Small and Sweeney~\cite{small_clustering_1985}. Variable level clustering involves applying a threshold (below which all edges in a graph are deleted) then iteratively selecting edges with the highest normalized co-citation value and extracting connected components from the graph as clusters for each edge in turn. Three parameters are needed: (i) a threshold or starting level based on a quantile of normalized co-citation frequency, (ii) a level increment, and (iii) a maximum cluster size. An issue is the generation of very large clusters by chaining through low edge weights.  Thus, at each iteration, any cluster exceeding the maximum cluster size  is returned to the process and a higher threshold is applied to break such clusters.
 
-In our implementation of variable level clustering, we first calculated the number of citations accumulated across Scopus for all 2,685,356 articles in \emph{comp}. After discarding those publications without any citations, \textcolor{blue}{Sitaram please confirm}, we restricted further analysis to highly cited articles, those in the 90th percentile of citations or higher, resulting in a dataset of size 212,311. We then identified 4,318,305 publications in Scopus that cite these 212,311 articles from \emph{comp}. For each of the 4,318,305 citing publications in turn, all possible ${n \choose 2}$ reference pairs were generated, where $n$ is the number of references in a publication. The cited reference pairs were restricted to those in the set of 212,311 highly cited papers previously identified. The frequency of these co-cited pairs was then computed across the dataset  and normalized using Salton's cosine formula~\cite{salton_citation_1979}. A total of 46,463,117 unique co-cited pairs were thus obtained. These data were represented in a graph where each node was a publication and the weighted edge between the pair was the normalized co-citation frequency. \par
+In our implementation of variable level clustering, we first calculated the number of citations accumulated across Scopus for all 2,685,356 articles in \emph{comp}. After discarding those publications without any citations, we restricted further analysis to highly cited articles, those in the 90th percentile of citations or higher, resulting in a dataset of size 212,311. We then identified 4,318,305 publications in Scopus that cite these 212,311 articles from \emph{comp}. For each of the 4,318,305 citing publications in turn, all possible ${n \choose 2}$ reference pairs were generated, where $n$ is the number of references in a publication. The cited reference pairs were restricted to those in the set of 212,311 highly cited papers previously identified. The frequency of these co-cited pairs was then computed across the dataset  and normalized using Salton's cosine formula~\cite{salton_citation_1979}. A total of 46,463,117 unique co-cited pairs were thus obtained. These data were represented in a graph where each node was a publication and the weighted edge between the pair was the normalized co-citation frequency. \par
 
-We applied variable clustering with initial parameters of threshold ($t$) = median normalized co-citation frequency (quantile=0.5), increment $i = 0.1$, and maximum cluster size, $mcs=200$. Thus, at start, all edges below the median normalized co-citation frequency were deleted. Clusters were formed by assembling connected components from each co-cited pair beginning with the heaviest edge weight. Clusters below size 100 were retained and any cluster larger than 200 nodes was carried over to the next round. The threshold, $t$, was then incremented by 0.1 and the process repeated while progressively incrementing $t$.  We used a bi-phasic approach where in which $t$ ranged from 0.5-0.9, after which $i$ was reduced to 0.01 for the range $0.9 \leq t \leq 0.99$. A final threshold of $t$=0.999 was applied to break the single remaining large cluster.  Using this approach, 22,232 clusters containing 84,591 nodes were generated, each containing less than 100 nodes. Clusters containing only 2 nodes were then discarded bringing the total number of clusters down to 10,298. 
+We applied variable clustering with initial parameters of threshold ($t$) = median normalized co-citation frequency (quantile=0.5), increment $i = 0.1$, and maximum cluster size, $mcs=200$. Thus, at start, all edges below the median normalized co-citation frequency were deleted. Clusters were formed by assembling connected components from each co-cited pair beginning with the heaviest edge weight. Clusters below size 100 were retained and any cluster larger than 200 nodes was carried over to the next round. The threshold, $t$, was then incremented by 0.1 and the process repeated while progressively incrementing $t$.  We used a bi-phasic approach where in which $t$ ranged from 0.5-0.9, after which $i$ was reduced to 0.01 for the range $0.9 \leq t \leq 0.99$. A final threshold of $t$=0.999 was applied to break the single remaining large cluster.  Using this approach, 22,232 clusters containing 84,591 nodes were generated, each containing less than 100 nodes. Clusters containing only 2 nodes were discarded bringing the total number of clusters down to 10,298. 
 
-Agglomerative clustering was then performed on these 10,298 clusters to generate higher-order clusters. Briefly, each cluster was now treated as a node and the edge weight between two clusters was assigned to the maximum edge weight of all edges between the nodes in these two clusters. Edges were arranged in descending order. The first pair of clusters was merged and its edge weight with other interacting clusters was recalculated. All edges were then re-ordered as before and the next pair of clusters was merged. The process was halted after 600 rounds to prevent single large clusters being generated (Fig.~\ref{fig:merge_select}).
+Agglomerative clustering was then performed on these 10,298 clusters to generate higher-order clusters. Briefly, each cluster was now treated as a node and the edge weight between two clusters was assigned to the maximum edge weight of all edges between the nodes in the two precursor clusters. Edges were arranged in descending order. The first pair of clusters was merged and its edge weight with other interacting clusters was recalculated. All edges were then re-ordered as before and the next pair of clusters was merged. The process was halted after 600 rounds to prevent single large clusters being generated (Fig.~\ref{fig:merge_select}).
 
 \section*{Results}
 \label{sec:results}
@@ -167,8 +167,7 @@ We also attempted to map these 20 clusters assembled through direct citation to 
 
 \subsection{Clustering by Co-citation.} 
 
-As described in Methods, we performed 600 iterations to the 10,298 clusters further limited to clusters containing at least 10 nodes, which resulted in 666 clusters. Further agglomeration resulted in the development of a single large cluster (Fig~\ref{fig:merge_select}). 
-The 20 largest clusters were used for further analysis and comparison with clusters generated by direct citation. The largest of these 20 clusters contained 1,276 nodes and the smallest contained 136.
+As described in Methods, we performed 600 iterations of agglomerative clustering to the 10,298 clusters. To focus on major clusters, we restricted agglomeration to clusters containing at least 10 nodes, which resulted in 666 clusters. Further agglomeration resulted in the development of a single large cluster (Fig~\ref{fig:merge_select}).  Consequently, the 20 largest clusters were used for further analysis and comparison with clusters generated by direct citation. The largest of these 20 clusters contained 1,276 nodes and the smallest contained 136.
 
 \section{Discussion}
 \textcolor{blue}{
@@ -195,7 +194,7 @@ Co-citation based clustering:
 \clearpage
 
 %%%%%%%%%
-\section{Figures}
+\section*{Figures}
 %%%%%%%%%
 
 \begin{figure}[ht]
@@ -213,10 +212,10 @@ Co-citation based clustering:
 \centering
 % Use the relevant command to insert your figure file.
 % For example, with the graphicx package use
-  \includegraphics[scale=0.5]{graclus_comparison.pdf}
+  \includegraphics[scale=0.4]{graclus_comparison.pdf}
 % figure caption is below the figure
-\caption{Summary of DBLP data cross-matched with Scopus. 2,685,356 publications from DBLP were cross-matched with Scopus and then grouped by the 27 major subject areas in the ASJC (Scopus) classification. The largest number of publications are contributed by Computer Science; Mathematics; and Engineering and then by Social Sciences; Physics and Astronomy; and Biochemistry, Genetics, and Molecular Biology. Publications were further annotated with respect to being either articles \emph{(ar)} or conference proceedings \emph{(cp)}. For this dataset, the major subject areas of Computer Science; Engineering; and Mathematics contributed the most publications while Pharmacology, Toxicology, and Pharmaceutics; Nursing, Veterinary and Dentistry contributed the least.}
-\label{fig:graclus_comparison}       
+\caption{Conductance Measurements of Clusters Generated by Graclus.  2,685,356 DBLP publications, 7,129,006 cited references, and 44,296,381 citations were clustered using Graclus into 18 (grac\_18), 20 (grac\_20), or 22 (grac-22) clusters. Conductance, $\phi(S)$, was measured for these clusters considering only the edges between publications using the formula: $\phi(S)=|\partial(S)|/min(vol(S),2m-vol(S)$, where $\partial(S)$ is the boundary (number of edges leaving a set), vol(S) is volume of a set of vertices as the sum of the degrees of the vertices in a set, and $m$ is the number of undirected edges in a set~\cite{shun_parallel_2016}.}
+\label{fig:graclus_comparison_conductance}       
 \end{figure}
 
 \newpage
@@ -230,6 +229,23 @@ Co-citation based clustering:
 \caption{Schematic representation of variable clustering protocol modified from Small and Sweeney (1985) \cite{small_clustering_1985}. Three parameters are specified: (i) a threshold or starting level based on a quantile of normalized co-citation frequency, (ii) a level increment, and  (iii) a maximum cluster size. Input data is a set of co-cited publications with edge-weight defined by normalized co-citation frequencies. Green clusters are within the max cluster size. At the initial threshold, $t1$, a single cluster below the maximum cluster size, $mcs$ (green), along with one large cluster above it (red) are generated. As the threshold is incremented to $t2$, additional clusters of acceptable size is generated. The cascade continues to completion, which is defined by all clusters being of size less than or equal to the $mcs$. In this schematic, five rounds are adequate for the process to run to completion.}
 \label{vlc_process}       % Give a unique label
 \end{figure}
+
+\begin{figure}[ht]
+\centering
+% Use the relevant command to insert your figure file.
+% For example, with the graphicx package use
+ \includegraphics[scale=0.5]{cocit_venn2.pdf}
+% figure caption is below the figure
+\caption{High-level disciplinary composition of publications in $\sim$2,000 clusters generated by variable-level clustering  of co-citation data.
+%Variable Level Clustering. 
+84,591 nodes from were matched to the 4 subject areas, 
+27 major subject areas, and 334 minor subject areas in the Scopus ASJC classification. Since 82.5\% of these nodes were assigned more to than one minor subject category, 
+we assigned fractional counts for the four subject areas that summed to 1 for each article. The figure shows a four way Venn Diagram~\cite{chen_venn_2011} illustrating the 
+relative frequencies of publications from the Physical Sciences, Social Sciences, Life Sciences, and Health Sciences.}
+\label{fig:cocitr_venn2}       % Give a unique label
+\end{figure}
+
+\newpage
 
 \newpage
 
@@ -270,20 +286,6 @@ Each cluster is characterized by topics that label at least 10\% of the publicat
 \end{figure}
 
 \newpage
-\begin{figure}[ht]
-\centering
-% Use the relevant command to insert your figure file.
-% For example, with the graphicx package use
- \includegraphics[scale=0.5]{cocit_venn2.pdf}
-% figure caption is below the figure
-\caption{High-level disciplinary composition of publications in $\sim$2,000 clusters generated by variable-level clustering  of co-citation data.
-%Variable Level Clustering. 
-84,591 nodes from were matched to the 4 subject areas, 
-27 major subject areas, and 334 minor subject areas in the Scopus ASJC classification. Since 82.5\% of these nodes were assigned more to than one minor subject category, 
-we assigned fractional counts for the four subject areas that summed to 1 for each article. The figure shows a four way Venn Diagram~\cite{chen_venn_2011} illustrating the 
-relative frequencies of publications from the Physical Sciences, Social Sciences, Life Sciences, and Health Sciences.}
-\label{fig:cocitr_venn2}       % Give a unique label
-\end{figure}
 
 \newpage
 \clearpage
