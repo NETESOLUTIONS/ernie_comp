@@ -118,7 +118,7 @@ Computer science, and its applications, has experienced rapid growth and diversi
 
 Noting that that the scientific literature serves a rich source of information to study the structure and historical development of a field, Salton and Bergmark conducted a historical study  of the computer science literature (419 computer articles published in 1974,  and 3,812 references cited in these articles)~\cite{salton_citation_1979}. These authors described the global structure of computer science as comprising three main areas (i) theoretical foundations, such as theory of computation, (ii) hardware and computer systems, such as architecture,  and (iii) software, such as programming systems.  Related areas noted were (a) mathematics of computing, such as numerical analysis, (b) special software topics, such as operating systems, (c) data management and database systems, (d) methodologies valid for multiple applications, such as algebraic manipulation, (e) computer applications, such as computer graphics, (f) non-technical aspects, such as computer education. 
 
-Progressing beyond 1974-79, and Salton and Bergmark's historical triad of theoretical foundations; hardware and computer systems; and software, the Computing Classification System (CCS)~\cite{acm_ref} published by the Association for Computing Machinery now consists of 13 top-level areas that reflect a more current view of the field. This classification also addresses relationships with other fields under the category of Applied Computing. However, an easy way to map scientific publications, especially interdisciplinary articles or those from fields proximal to the CCS classification does not exist. 
+Beyond Salton and Bergmark's historical triad of theoretical foundations; hardware and computer systems; and software, the Computing Classification System (CCS)~\cite{acm_ref} published by the Association for Computing Machinery now consists of 13 top-level areas that reflect a more current view of the field. This classification also addresses relationships with other fields under the category of Applied Computing. However, an easy way to map scientific publications, especially interdisciplinary articles or those from fields proximal to the CCS classification does not exist. 
 
 Other classification systems are available such as the All Science Journal Classification (ASJC) developed and maintained by Scopus, the Web of Science research and categorical classifications from Clarivate Analytics, and the NSF classification system~\cite{nsf_classification}. All three rely on applying one or more journal-derived labels to articles.  Of these, Scopus and the Web of Science also include global bibliographies with citation links and proprietary unique identifiers for publications, some of which can be matched to digital object identifiers (DOIs). Applying labels designed to represent journals, to articles, can be problematic in terms of accuracy given broad scope in some journals,  and also because fields evolve faster than their journal classifications. [should we put in a comment about why article level labels provided by authors have limited use and that enforcement of controlled vocabularies varies by publisher?] Shu and colleagues recently noted in a comparative study of the Chinese Science Citation Database (CSCD) and the Web of Science, that 46\% of articles did not belong to the discipline of the journal they were published in~\cite{shu_comparing_2019}. Others have also discussed and critiqued disciplinary assignments using journal based classifications~\cite{wang_large-scale_2016,perianes-rodriguez_comparison_2017}. Article classification systems have been constructed, however, which escape some of the criticisms of journal-based classification~\cite{traag_louvain_2019,boyack_classification_2014,waltman_new_2012} but seem to be in the research domain rather than the domain of practical use [need to check on this].[May need another bridging sentence to the next paragraph].
  
@@ -151,9 +151,11 @@ Agglomerative clustering was then performed on these 10,298 clusters to generate
 \section*{Results}
 \label{sec:results}
 
-For the purpose of this study, our working definition of the computer science literature was all publications in the DBLP bibliography published in the years 1996-2015, that had (i) a digital object identifier (DOI), and (ii) could also be matched to article identifiers in the Scopus bibliography. The process of selection and matching resulted in a dataset of 2,685,356 publications (Materials and Methods). Of these roughly 2.8 million publications, approximately 2.07 million were classified as COMP under subject area and 2.07 million similarly were assigned ASJC codes corresponding to Computer Science (major subject area), with the balance of 610,000 publications non-exclusively shared between 26 different major subject areas ranging from Engineering (330,048) to Dentistry (1). Thus, the sets of computer science publications in DBLP and Scopus are partially overlapping rather than DBLP being a perfect subset of Scopus. [the point being that we should justify our use of both journal and article level classifications].
+For the purpose of this study, our working definition of the computer science literature was all publications in the DBLP bibliography published in the years 1996-2015, that had (i) a digital object identifier (DOI), and (ii) could also be matched to article identifiers in the Scopus bibliography. The process of selection and matching resulted in a dataset of 2,685,356 publications (Materials and Methods). Of these roughly 2.8 million publications, approximately 2.07 million were classified as COMP under subject area and assigned ASJC codes corresponding to Computer Science (major subject area and 13 minos subject areas), with the balance of 610,000 publications non-exclusively shared between 26 different major subject areas ranging from Engineering (330,048) to Dentistry (1). The set of 2.07 million publications classified as COMP in Scopus spanned all 13 minor subject areas with Software 30.3\% being the largest component and Computer Science (miscellaneous) 0.9\% the smallest. The number of minor subject areas assigned to a publication averaged to 1.75 with 53\% of the publications being assigned to one minor subject area and 0.0003\% assigned to 7 different minor subject areas (Table 1).
 
-\subsection{Clustering by Direct Citation} 
+Thus, the sets of computer science publications in DBLP and Scopus are partially overlapping rather than DBLP being a perfect subset of Scopus. [the point being that we should justify our use of both journal and article level classifications].
+
+\subsection{Clustering by Direct Citation} [Need a sentence about why we're clustering].
 Clustering of publications is commonly accomplished through direct citation, bibliographic coupling, and co-citation with an argument being made for direct citation as the best approach to concentrate citation links~\cite{klavans_which_2017}. Accordingly, we first used direct citation links as the basis for cluster formation. A set of 20 clusters was generated using Graclus, a spectral clustering technique that has previously been applied to citation data~\cite{graclus_2007,subelj_clustering_2016}. 
 \textcolor{blue}{
 Considering the caveats associated with generating \emph{comp}, namely, the coverage limitations of the DBLP dataset (ii) cross-matching to Scopus (iii) journal based classification (iv) clustering, }
@@ -163,11 +165,13 @@ Figure~\ref{fig:heatmap} permits examination of these data from two perspectives
 
 From the other perspective, cluster 17 was the most diverse and contained publications annotated with 8 minor subject area labels, of which Biochemistry, Chemistry(all), Genetics, and Molecular Biology were the most distant from computer science while Statistics \& Probability, Computational Theory \& Mathematics, and Computational Mathematics are closer.  These data suggest that areas central to computer science in 2019 (Salton and Bergmark's triad) are more likely to be found in multiple clusters (hardware, software, and theory), and that biology, chemistry, and statistics are the most proximal to computer science. [What about mathematics?]  A second inference is that, in a few cases journal-based classification and article clusters are tightly related in terms of article content (Hardware and Architecture). Thirdly, that some areas of computer science are relatively ubiquitous, e.g. computer applications. Last, that interactions with fields outside computer science are restricted to a single cluster or small numbers of clusters, e.g., cluster 17 (ibid) and cluster 18 (artificial intelligence, cognitive neuroscience, and neurology).
 
-We also attempted to map these 20 clusters assembled through direct citation to the CCS classification by manually matching the top 25-50 most heavily cited publications in each cluster to corresponding categories in the CCS. This was feasible in some cases, clusters 0 and 1 mapped reasonably well to the top level categories Hardware and Computer Systems Organization but less so in the cases of other clusters. Further, the top cited papers often derived from biology and we were concerned that this small sample (top cited papers) were not representative of the cluster. 
+We also attempted to map these 20 clusters assembled through direct citation to the CCS classification by manually matching the top 25-50 most heavily cited publications in each cluster to corresponding categories in the CCS. This was feasible in some cases, clusters 0 and 1 mapped reasonably well to the top level categories Hardware and Computer Systems Organization but less so in the cases of other clusters. Further, the top cited papers often derived from biology and we were concerned that this small sample (top cited papers) were not representative of the cluster. [Overall conclusions of Graclus based clustering?]
 
-\subsection{Clustering by Co-citation.} 
+\subsection{Clustering by Co-citation.} [Sentence justifying co-citation base clustering]
 
 As described in Methods, we performed 600 iterations of agglomerative clustering to the 10,298 clusters. To focus on major clusters, we restricted agglomeration to clusters containing at least 10 nodes, which resulted in 666 clusters. Further agglomeration resulted in the development of a single large cluster (Fig~\ref{fig:merge_select}).  Consequently, the 20 largest clusters were used for further analysis and comparison with clusters generated by direct citation. The largest of these 20 clusters contained 1,276 nodes and the smallest contained 136.
+
+[Overall conclusions of cocitation based clustering]
 
 \section{Discussion}
 \textcolor{blue}{
@@ -284,12 +288,49 @@ Each cluster is characterized by topics that label at least 10\% of the publicat
  }
 \label{fig:heatmap}       % Give a unique label
 \end{figure}
-
 \newpage
+
+\begin{figure}[ht]
+% Use the relevant command to insert your figure file.
+% For example, with the graphicx package use
+  \includegraphics[scale=0.45]{graclus_cocit_fig.pdf}
+% figure caption is below the figure
+\caption{Heat map for the clustering obtained by direct citation. The  y-axis (rows) correspond to topics, defined by Scopus characterizations, and the
+x-axis (columns) represent the 20 different clusters.  
+Each cluster is characterized by topics that label at least 10\% of the publications in the cluster.
+ }
+\label{fig:heatmap}       % Give a unique label
+\end{figure}
 
 \newpage
 \clearpage
 \section*{Tables}
+
+\begin{table}[ht]
+\caption{\emph{Statistics regarding the 20 clusters produced using direct citation. The \emph{comp} dataset 
+2685021 is because of inner joins on ASJC Explain conductance calculations~\cite{shun_parallel_2016}}}
+\label{tab:1}       
+\begin{tabular}{lrccc}
+\hline\noalign{\smallskip}
+minor\_subject\_area & Percent of Publications \\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+Software & 30.30 \\ 
+Computer Science Applications & 25.20 \\ 
+Computer Networks and Communications & 21.60 \\ 
+Computer Science(all) & 19.60 \\ 
+Artificial Intelligence & 14.30 \\ 
+Information Systems & 11.90 \\ 
+Hardware and Architecture & 11.50 \\ 
+Signal Processing & 9.90 \\ 
+Computer Vision and Pattern Recognition & 9.50 \\ 
+Computational Theory and Mathematics & 8.00 \\ 
+Human-Computer Interaction & 7.50 \\ 
+Computer Graphics and Computer-Aided Design & 5.20 \\ 
+Computer Science (miscellaneous) & 0.90 \\ 
+\noalign{\smallskip}\hline
+\end{tabular}
+\end{table}
+\newpage
 
 \begin{table}[ht]
 \caption{\emph{Statistics regarding the 20 clusters produced using direct citation. The \emph{comp} dataset 
