@@ -139,7 +139,7 @@ Shu and colleagues recently noted in a comparative study of the Chinese Science 
 Others have also discussed and critiqued disciplinary assignments using journal-based classifications~\cite{wang_large-scale_2016,perianes-rodriguez_comparison_2017}. 
 Article classification systems have been constructed that escape some of the criticisms of journal-based classification~\cite{traag_louvain_2019,boyack_classification_2014,waltman_new_2012}, but do not enjoy widespread use. [Add reference to Scandinavian paper in QSS].
  
-In this study, we extend the work of Salton and Bergmark by combining article and journal approaches to study trends in computer science, while also considering connections to other fields. As a source of computer science literature, we used DBLP, a reference bibliography for computer science~\cite{dblp_ref}. The DBLP bibliography covers publications from computer science and includes publications from hybrid fields, where they are considered pertinent to computer science research. We describe below the high-level interactions of computer science within the Physical Sciences, and with the Social Sciences, Life Sciences, and Health Sciences [What did we find? Some kind of preview sentence!].
+In this study, we extend the work of Salton and Bergmark by combining article and journal approaches to study trends in computer science, while also considering connections to other fields, especially biology, which dominates the total number of scientific publications and is citationally active [need to tweak]. As a source of computer science literature, we used DBLP, a reference bibliography for computer science~\cite{dblp_ref}. The DBLP bibliography covers publications from computer science and includes publications from hybrid fields, where they are considered pertinent to computer science research. We describe below the high-level interactions of computer science within the Physical Sciences, and with the Social Sciences, Life Sciences, and Health Sciences [What did we find? Some kind of preview sentence!].
 
 \section{Materials and Methods}
 \label{sec:methods}
@@ -147,20 +147,18 @@ In this study, we extend the work of Salton and Bergmark by combining article an
 
  \subsection{Overview}
  In our study of the structure of a twenty year cohort of the computer science literature, we chose to use both traditional journal-based and article-based approaches. Considering that traditional disciplines `may only partly reflect the actual organization of today's scientific research'~\cite{waltman_new_2012}, we constructed article clusters at high levels of aggregation using citations to examine the \emph{comp} dataset and mapped these clusters to journal-based categories.
- Clustering of publications is commonly accomplished through direct citation, bibliographic coupling, and co-citation with direct citation being proposed as as the best approach to concentrate citation links~\cite{klavans_which_2017}. 
-Accordingly, we used direct citation links as the basis for cluster formation, and also co-citation to obtain an alternative view.
+ 
+ Clustering of publications is commonly accomplished through direct citation, bibliographic coupling, and co-citation with direct citation being proposed as as the best approach to concentrate citation links~\cite{klavans_which_2017}. Accordingly, we used direct citation links as the basis for cluster formation, and also co-citation to obtain an alternative view.
 
-For the purpose of this study, our working definition of the computer science literature was all publications in the DBLP bibliography that (i) had a digital object identifier (DOI), and (ii) could also be matched to article identifiers in the Scopus bibliography. 
-Our underlying assumption is that records in DBLP are greatly enriched for computer science even while recognizing that coverage may be incomplete and possibly biased. Cross-matching DBLP publications to records in the Scopus, abstract and citation database of peer-reviewed literature, enabled us to harvest the richer links in Scopus as well as extract links to publications from other disciplines. This cross-matching to Scopus, also allows the use of both journal and article based classifications when clustering documents. Using both direct citations and co-citations as the basis for clustering, we used DBLP articles from journals and conference proceedings for the period 1996-2015. We reconciled these clusters with the All Science Journal Classification (ASJC) developed and maintained by Scopus through a combination of automated and manual procedures, producing a dataset of  2,685,356 publications.
-
+For the purpose of this study, our working definition of the computer science literature was all publications in the DBLP bibliography that (i) had a digital object identifier (DOI), and (ii) could also be matched to article identifiers in the Scopus bibliography. The underlying assumption is that records in DBLP are greatly enriched for computer science even while recognizing that coverage may be incomplete and possibly biased. Cross-matching DBLP publications to records in the Scopus, abstract and citation database of peer-reviewed literature, enabled us to harvest the richer links in Scopus as well as extract links to publications from other disciplines. This cross-matching to Scopus, also allows the use of both journal and article based classifications when clustering documents. Using both direct citations and co-citations as the basis for clustering, we used DBLP articles from journals and conference proceedings for the period 1996-2015. We reconciled these clusters with the All Science Journal Classification (ASJC) developed and maintained by Scopus through a combination of automated and manual procedures, producing a dataset of  2,685,356 publications.
 
 \subsection{Data}
-A stable release of the DBLP computer science bibliography~\cite{dblp_ref} consisting of 7,079,994 records was downloaded as dblp-2018-08-01.xml.gz. Just over 95\% of the publications within were published after 1996. Publications were parsed from the XML source file and loaded into a PostgreSQL database.  We have previously parsed the Scopus dataset, presently at over 87.8 million publications, into a custom schema as part of implementing a larger data platform for research evaluation~\cite{GithubERNIE2019}. The total number of publications in Scopus that are labeled COMP with major subject area of Computer Science is 5,835,160. Records in the DBLP dataset were matched to Scopus identifiers using digital object identifiers (DOIs). This procedure resulted in a dataset of 2,685,356 DBLP publications with Scopus identifiers where 1,278,322 (47.6\%) were labeled as article and 1,407,034 (52.4\%) as conference proceedings.  References cited by these publications were then extracted from Scopus (7,129,006 records), resulting in a total of 8,000,411 nodes (publications and references) and 44,296,381 edges that represent citations within the dataset. This dataset is referred to as \emph{comp} (Fig~\ref{fig:ar_cp_annotation}, Table~\ref{tab:comp}).  
+A stable release of the DBLP computer science bibliography~\cite{dblp_ref} consisting of 7,079,994 records was downloaded as dblp-2018-08-01.xml.gz. Slightly over 95\% of the publications within were published after 1996. Publications were parsed from the XML source file and loaded into a PostgreSQL database. As part of implementing a larger data platform for research evaluation~\cite{GithubERNIE2019}, we have previously parsed the Scopus dataset, presently at over 87.8 million publications, into a custom schema in a PostgreSQL database. The total number of publications in Scopus labeled with major subject area of Computer Science (in turn a subset of the Physical Sciences subject area) is 5,835,160. Records in the DBLP dataset were matched to Scopus identifiers using digital object identifiers (DOIs). This procedure resulted in a dataset of 2,685,356 DBLP publications with Scopus identifiers where 1,278,322 (47.6\%) were labeled as article and 1,407,034 (52.4\%) as conference proceedings.  References cited by these publications were then extracted from Scopus (7,129,006 records), resulting in a total of 8,000,411 nodes (publications and references) and 44,296,381 edges that represent citations within the dataset. This dataset is referred to as \emph{comp} (Fig~\ref{fig:ar_cp_annotation}, Table~\ref{tab:comp}).  
  
 \subsection{Clustering methods} In applying both clustering by direct citation and by co-citation, we attempted to consider, wherever possible, the criteria articulated by \v{S}ubelj, van Eck, and Waltman~\cite{subelj_clustering_2016}, of (i) the largest cluster should be no more than 10 times the smallest one, (ii) small clusters should be eliminated, (iii) small changes and replicates should yield similar results (``stability"),  (iv) computing time should be minimized where possible, and (v) the clustering should seem reasonable on a qualitative level (``intuitive sensibility").
 
 \paragraph{Clustering by Direct Citation.} Graclus~\cite{graclus_2007} is a spectral graph clustering package that optimizes  various clustering criteria, including normalized cut, ratio cut, and ratio association, that has previously been applied to citation data~\cite{subelj_clustering_2016}. 
-We used v1.2 in our experiments. The \emph{comp} dataset was formatted as an undirected graph, stored in a file with a header line indicating the number of nodes and edges, and used as input to Graclus, which requires the number of clusters to be formed as an input parameter. In preliminary experiments, we varied the number of clusters to be formed between 10 and 50 clusters (data not shown).  At around 20 clusters, clusters size was relatively stable with the largest cluster containing roughly 10 times the number of nodes in the smallest one~\cite{subelj_clustering_2016}. Consequently, we used Graclus to generate 20 clusters, labeled 0-19 (Table~\ref{tab:graclus}).
+We used v1.2 in our experiments. The \emph{comp} dataset was formatted as an undirected graph, stored in a file with a header line indicating the number of nodes and edges, and used as input to Graclus, which requires the number of clusters to be formed as an input parameter. In preliminary experiments, we varied the number of clusters to be formed between 10 and 50 clusters (data not shown).  At around 20 clusters, clusters size was relatively stable with the largest cluster containing roughly 10 times the number of nodes in the smallest one~\cite{subelj_clustering_2016}. Consequently, we used Graclus to generate 20 clusters, labeled 0-19 (Table~\ref{tab:graclus}), analogous to Level 1 of Waltman and van Eck's mapping of nearly 10 million publications~\cite{waltman_new_2012} but focused on the DBLP bibliography.
 
 We also used conductance, as defined in Shun et al.~\cite{shun_parallel_2016}, to  evaluate clustering by direct citation (smaller is better), noting that conductance has been found to be a good metric for this purpose~\cite{emmons2016analysis,almeida_2012}. 
 %Tandy, George - add reference to Zaki paper as well
@@ -182,16 +180,16 @@ We used a modification of variable level clustering combined with agglomerative 
 
 In our implementation of variable level clustering (Fig.~\ref{fig:vlc_process}), we first calculated the number of citations accumulated across Scopus for all 2,685,356 articles in \emph{comp}. After discarding those publications without any citations, we restricted further analysis to highly cited articles--those in the 90th percentile of citations or higher--resulting in a dataset of size 212,311. We then identified 4,318,305 publications in Scopus that cite these 212,311 articles from \emph{comp}. For each of the 4,318,305 citing publications in turn, all possible ${n \choose 2}$ reference pairs were generated from a publication's cited references, where $n$ is the number of references in a publication. The cited reference pairs this generated were then restricted to those in the set of 212,311 highly cited papers previously identified. The frequency of these co-cited pairs was then computed across the \emph{comp} dataset  and normalized using Salton's cosine formula~\cite{salton_citation_1979}. A total of 46,463,117 unique co-cited pairs were thus obtained. These data were represented in a graph where each node was a publication and the weighted edge between the pair was the normalized co-citation frequency. \par 
 
-We applied variable clustering with initial parameters of threshold ($t$) = median normalized co-citation frequency (quantile=0.5), increment $i = 0.1$, and maximum cluster size, $mcs=200$. Thus, at start, all edges below the median normalized co-citation frequency were deleted. Clusters were formed by assembling connected components from each co-cited pair beginning with the heaviest edge weight. Clusters below size 100 were retained and any cluster larger than 200 nodes was carried over to the next round. The threshold, $t$, was then incremented by 0.1 and the process repeated while progressively incrementing $t$.  We used a bi-phasic approach where in which $t$ ranged from 0.5-0.9, after which $i$ was reduced to 0.01 for the range $0.9 \leq t \leq 0.99$. A final threshold of $t$=0.999 was applied to break the single remaining large cluster.  Using this approach, 22,232 clusters containing 84,591 nodes were generated, each containing less than 100 nodes. Clusters containing only 2 nodes were discarded bringing the total number of clusters down to 10,298. The publications in these 10,298 clusters were overwhelmingly drawn from the Physical Sciences (one of the 4 top level categories in the Scopus ASJC classification), of which computer science is a sub-category (Fig.~\ref{fig:cocitr_venn2}).
+We applied variable clustering with initial parameters of threshold ($t$) = median normalized co-citation frequency (quantile=0.5), increment $i = 0.1$, and maximum cluster size, $mcs=200$. Thus, at start, all edges below the median normalized co-citation frequency were deleted. Clusters were formed by assembling connected components from each co-cited pair beginning with the heaviest edge weight. Clusters below size 100 were retained and any cluster larger than 200 nodes was carried over to the next round. The threshold, $t$, was then incremented by 0.1 and the process repeated while progressively incrementing $t$.  We used a bi-phasic approach where in which $t$ ranged from 0.5-0.9, after which $i$ was reduced to 0.01 for the range $0.9 \leq t \leq 0.99$. A final threshold of $t$=0.999 was applied to break the single remaining large cluster.  Using this approach, 22,232 clusters containing 84,591 nodes were generated, each containing less than 100 nodes. Clusters containing only 2 nodes were discarded bringing the total number of clusters down to 10,298. The publications in these 10,298 clusters were overwhelmingly drawn from the Physical Sciences (one of the 4 top level categories in the Scopus ASJC classification), of which computer science is a sub-category (Fig.~\ref{fig:quad-chart}).
 
-Agglomerative clustering was then performed on these 10,298 clusters to generate higher-order clusters. To focus on larger clusters, only those with at least 10 nodes were used as input. Briefly, each cluster was now treated as a node and the edge weight between two clusters was assigned to the maximum edge weight of all edges between the nodes in the two clusters. Edges were arranged in descending order. The first pair of clusters was merged and its edge weight with other interacting clusters was recalculated, again based on maximum edge weight. All edges were then re-ordered as before and the next pair of clusters was merged. The process was halted after 600 rounds to prevent large outlier clusters being generated (Fig.~\ref{fig:merge_select}).
+Agglomerative clustering was then performed on these 10,298 clusters to generate higher-order clusters. To focus on larger clusters, only those with at least 10 nodes were used as input. Briefly, each cluster was now treated as a node and the edge weight between two clusters was assigned to the maximum edge weight of all edges between the nodes in the two clusters. Edges were arranged in descending order. The first pair of clusters was merged and its edge weight with other interacting clusters was recalculated, again based on maximum edge weight. All edges were then re-ordered as before and the next pair of clusters was merged. The process was halted after 600 rounds to prevent large outlier clusters being generated (Fig.~\ref{fig:quad-chart}).
 
 \section*{Results}
 \label{sec:results}
 
 
 \subsection{Data}
-The process of selection and matching resulted in a dataset of  publications (Materials and Methods). Of 4,291,130 DBLP publications with DOIs, only  2,685,356 had corresponding DOIs in Scopus. Of these roughly 2.68 million publications, approximately 2.07 million were assigned ASJC codes in Scopus corresponding to Computer Science (major subject area with 13 minor subject areas (Table~\ref{tab:comp}), with the balance of 610,000 publications non-exclusively shared between 26 different major subject areas ranging from Engineering (330,048) to Dentistry (Fig.~\ref{fig:ar_cp_annotation}). The set of 2.07 million publications classified under the major subject area Computer Science in Scopus spanned all 13 minor subject areas with Software 30.3\% being the largest component and Computer Science (miscellaneous) 0.9\% the smallest. Interestingly, 409,082  publications were labeled Theoretical Computer Science but under the major subject area of Mathematics(Table~\ref{tab:comp}). Overall, 38.86\% of the publications were assigned to one minor subject area, 78.1\% to two minor subject areas, 909.9\% to three minor subject areas, and 0.0003\% assigned to 8 different minor subject areas. 
+The process of selection and matching resulted in a dataset of  publications (Materials and Methods). Of 4,291,130 DBLP publications with DOIs, only  2,685,356 had corresponding DOIs in Scopus. Of these roughly 2.68 million publications, approximately 2.07 million were assigned ASJC codes in Scopus corresponding to Computer Science (major subject area with 13 minor subject areas (Table~\ref{tab:comp}), with the balance of 610,000 publications non-exclusively shared between 26 different major subject areas ranging from Engineering (330,048) to Dentistry (Fig.~\ref{fig:ar_cp_annotation}). The set of 2.07 million publications classified under the major subject area Computer Science in Scopus spanned all 13 minor subject areas with Software 30.3\% being the largest component and Computer Science (miscellaneous) 0.9\% the smallest. Publications in the \emph{comp} dataset labeled Theoretical Computer Science (409,082) are classified under the the major subject area of Mathematics rather than Computer Science (Table~\ref{tab:comp}). Overall, 38.86\% of the publications were assigned to one minor subject area, 78.1\% to two minor subject areas, 90.9\% to three minor subject areas, and 0.0003\% assigned to 8 different minor subject areas. 
 
 %George, please consider revising this text
 %the sets of computer science publications in DBLP and Scopus are partially overlapping rather than DBLP being a perfect subset of Scopus. [the point being that we should justify our use of both journal and article level classifications].
@@ -207,7 +205,7 @@ From the alternate perspective (columns), cluster 17 was the most diverse and co
 
 These data suggest that areas central to computer science in 2019 (Salton and Bergmark's historical triad of hardware, software, and theory) are more likely to be found in multiple clusters than peripheral topics.
 %, whereas areas such as biology, chemistry, and statistics are more restricted in distribution.  
-A second inference is that, in some cases, journal-based classification and our article clusters are similar in terms of article content (Hardware and Architecture). 
+A second inference is that, in some cases, journal-based classification and our article clusters align fairly well (Hardware and Architecture). 
 A third inference is that the ASJC minor subject area ``Computer Applications" is relatively non-specific, and publications thus labeled are nearly ubiquitous (16/20).  Finally,   for the DBLP dataset, interactions with fields outside computer science (e.g., Biochemistry)  are  typically restricted to a single cluster or found in a small number of clusters.
 
 We also note that these clusters cannot be adequately characterized by using a single CCS classification, a challenge that has been previously noted \cite{waltman_new_2012}.
@@ -218,31 +216,18 @@ the top cited papers often derived from biology and yet biology was clearly not 
 
 \subsection{Clustering by Co-citation.} For an alternate examination of the data, we used co-citation frequencies to cluster the DBLP dataset as described above. Figure \ref{fig:heatmap_cocit} shows a heatmap in which clusters constructed by co-citation are mapped to Scopus ASJC minor subject areas. Mappings are only shown if they account for at least 15\% of the publications in a cluster (upper panel). Under these conditions, only 17 of 20 clusters mapped to minor subject areas where at least 15\% of the nodes in a cluster were labeled with a given subject area. When the threshold was reduced to 10\% all 20 clusters indicated at least one mapping to a minor subject area. We interpret these data as indicative of two kinds of co-citational linkages (i) intra-cluster (ii) cross cluster. The latter predominates and is detected at lower thresholds (lower panel). No cluster maps to more than 3 minor subject area at the 15\% threshold in comparison to a maximum of 8 minor subject areas for clustering by direct citation (Fig 3, Cluster 17). It should be noted, however, that the size of clusters constructed by co-citation is much smaller than those generated by direct citation through Graclus. 
 
-\textcolor{blue}{
-Unlike the earlier figure [insert figure reference] Unlike the case of clustering by direct citation, no cluster maps to more than three ASJC minor subject areas. We have to decide what to say about this figure but I think it suggests intra-cluster relationships for the most part. }
+We also mapped the contents of clusters generated by direct citation and co-citation to each other, Fig~\ref{fig:graclus_cocit_fig}.
 
+\section{Discussion} In this article, we have tried to revisit a characterization of computer science from 1979~\cite{salton_citation_1979} in the light of expansion and diversification of this field. We analyzed considerably more data, 2.68 million publications versus 391, and leveraged access to two bibliographic databases, DBLP and Scopus. The former identifies a sample of the scientific literature that is computer science and the latter (roughly 10 times larger at 87.XX million publications) enabled analyzing citations across the four major groups of Physical Science, Social Sciences, Life Sciences, and Health Sciences in the Scopus ASJC classification.
 
-\section{Discussion}
-\textcolor{blue}{
-Results obtained using the two different clustering methods produced different but complementary views of the computer
-science literature.
-Discuss: very low conductance values, and the significance of this. 
-Need for additional work. 
-Perhaps value in looking at change over time.
-Emerging interactions of computer science and other disciplines, 
-so papers are related by the communities they impact (co-citation clustering).
- }
+Obvious critiques of our approach are (i) use of the DBLP dataset, which may not capture all aspects of computer science and its interactions with other fields (ii) partitioning DBLP into a weakly justified number of clusters and arbitrarily defined thresholds for detection (iii) mapping the results of this clustering against a classification designed around journals rather than individual articles. Our focus on high-level features may mitigate these valid concerns and preference for simplicity and intuitiveness in our choice of methods. 
 
-%\noindent
-Co-citation based clustering:
-\begin{enumerate}
-\item Stratify by year after subsetting by COMP and restricting to article and cp only
-\item Apply fractional citation counting and identify highly-cited papers
-\item Calculate normalized co-citations
-\item Cluster by variable clustering method of Small
-\item Evaluate major co-cited pairs
-\end{enumerate}
+Reconciling direct citation clusters to the Scopus ASJC classification, yielded results that are consistent with the observation of Waltman and van Eck (2012)~\cite{waltman_new_2012}, `that traditional disciplines such as those just mentioned only partly reflect the actual organization of today’s scientific research'. Of interest to us, was the single obviously multidisciplinary cluster in which at least 15\% of its component publications were labeled with the ASJC minor subject areas Biochemistry, Chemistry, Computational Mathematics, Computational Theory and Mathematics, Computer Science Applications, Genetics, Molecular Biology, Statistics \& Probability followed by the cluster mapping to Artificial Intelligence, Cognitive Neuroscience, and Neurology.  Perhaps at the opposite end of this spectrum is the more insular cluster that maps to Hardware and Architecture, Electrical and Electronic Engineering, and Software. To us, these data suggest a diverse field of activities [not sure what that means].
 
+Analyzing clusters generated using co-citation links is more challenging. The data suggest two patterns that may co-exist. One in which the nodes in a co-citation cluster are detected at the threshold applied mostly from a single or two direct citation clusters. The second, which may account for more than 50\% of the nodes in a co-citation cluster, in which these nodes are distributed across all 20 direct citation clusters. The latter is intriguing in its implications of a web of such citational links gluing the body of scientific literature together.
+
+Emerging interactions of computer science and other disciplines, so papers are related by the communities they impact (co-citation clustering). [Over to Tandy]
+ 
 \emph{need to cite Granovetter somewhere for definition of strong and weak ties that Small refers to}
 \clearpage
 
@@ -285,59 +270,19 @@ Each cluster is characterized by topics that label at least 15\% of the publicat
 \label{fig:heatmap}       % Give a unique label
 \end{figure}
 
-
-\begin{figure}[ht]
-\centering
-% Use the relevant command to insert your figure file.
-% For example, with the graphicx package use
-  \includegraphics[scale=0.25]{vlc.pdf}
-% figure caption is below the figure
-\caption{Schematic representation of variable clustering protocol modified from Small and Sweeney (1985) \cite{small_clustering_1985}. Three parameters are specified: (i) a threshold or starting level based on a quantile of normalized co-citation frequency, (ii) a level increment, and  (iii) a maximum cluster size. Input data is a set of co-cited publications with edge-weight defined by normalized co-citation frequencies. Green clusters are within the max cluster size. At the initial threshold, $t1$, a single cluster below the maximum cluster size, $mcs$ (green), along with one large cluster above it (red) are generated. As the threshold is incremented to $t2$, additional clusters of acceptable size is generated. The cascade continues to completion, which is defined by all clusters being of size less than or equal to the $mcs$. In this schematic, five rounds are adequate for the process to run to completion.}
-\label{fig:vlc_process}       % Give a unique label
-\end{figure}
-
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.9\textwidth]{quad-chart-narrow.pdf}
 \caption{Co-citation analysis.
-(a) The variable-level clustering technique (adapted from
-Small and Sweeney (1985)).
-(b) The distribution of publications (using fractional counting)
-across four main categories.
+(a) Schematic representation of variable clustering protocol modified from Small and Sweeney (1985) \cite{small_clustering_1985}. Three parameters are specified: (i) a threshold or starting level based on a quantile of normalized co-citation frequency, (ii) a level increment, and  (iii) a maximum cluster size. Input data is a set of co-cited publications with edge-weight defined by normalized co-citation frequencies. Green clusters are within the max cluster size. At the initial threshold, $t1$, a single cluster below the maximum cluster size, $mcs$ (green), along with one large cluster above it (red) are generated. As the threshold is incremented to $t2$, additional clusters of acceptable size is generated. The cascade continues to completion, which is defined by all clusters being of size less than or equal to the $mcs$. In this schematic, five rounds are adequate for the process to run to completion.
+(b) The distribution of publications (using fractional counting) across four top-level ASJC subject areas after applying variable level clustering as in a)
 (c) The Venn diagram of the fractional counting given in (b).
-(d) The distribution of cluster sizes (logarithmic y-axis) as
-a function of the number of iterations of the agglomerative
-clustering technique; note that the largest cluster is
-extremely large when the number of iterations exceeds 600.
+(d) The distribution of cluster sizes (logarithmic y-axis) as a function of the number of iterations of the agglomerative clustering technique; note that the largest cluster is extremely large when the number of iterations exceeds 600.
 }
 \label{fig:quad-chart}
 \end{figure}
 
-\begin{figure}[ht]
-\centering
-% Use the relevant command to insert your figure file.
-% For example, with the graphicx package use
- \includegraphics[scale=0.5]{cocit_venn2.pdf}
-% figure caption is below the figure
-\caption{High-level disciplinary composition of publications in $\sim$2,000 clusters generated by variable-level clustering  of co-citation data.
-%Variable Level Clustering. 
-84,591 nodes from were matched to the 4 subject areas, 
-27 major subject areas, and 334 minor subject areas in the Scopus ASJC classification. Since 82.5\% of these nodes were assigned more to than one minor subject category, 
-we assigned fractional counts for the four subject areas that summed to 1 for each article. The figure shows a four way Venn Diagram~\cite{chen_venn_2011} illustrating the 
-relative frequencies of publications from the Physical Sciences, Social Sciences, Life Sciences, and Health Sciences.}
-\label{fig:cocitr_venn2}       % Give a unique label
-\end{figure}
-\newpage
 
-\begin{figure}[ht]
-\centering
-% Use the relevant command to insert your figure file.
-% For example, with the graphicx package use
-  \includegraphics[scale=0.5]{merge_select.pdf}
-% figure caption is below the figure
-\caption{Clustering produced using co-citation data; the y-axis is the cluster size (given logarithmically), and the x-axis is the number of iterations of the agglomerative clustering technique. Note that iterating more than 600 times produces a very large cluster.  }
-\label{fig:merge_select}       % Give a unique label
-\end{figure}
 
 \newpage
 
@@ -354,21 +299,14 @@ Each cluster is characterized by topics that label at least 15\% of the publicat
 \end{figure}
 \newpage
 
-\newpage
-
-
 \begin{figure}[ht]
 % Use the relevant command to insert your figure file.
 % For example, with the graphicx package use
   \includegraphics[scale=0.45]{graclus_cocit_fig.pdf}
 % figure caption is below the figure
-\caption{Heat map for the clustering obtained by direct citation. The  y-axis (rows) correspond to topics, defined by Scopus characterizations, and the
-x-axis (columns) represent the 20 different clusters.  
-Each cluster is characterized by topics that label at least 10\% of the publications in the cluster.
- }
-\label{fig:heatmap}       % Give a unique label
+\caption{Intersections between clusters generated using direct citation and co-citation features. x-axis: Clusters generated by Graclus number 0-19. y-axis: Cluster generated by variable level clustering and agglomerative clustering using a modification of Small and Sweeney (1985)~\cite{small_clustering_1985}. Point size (perc) is the percentage of a co-cited cluster that maps to a corresponding Graclus cluster. A minimum threshold of 15\% was set. Graclus cluster 19, the 20th cluster, did not map to any cluster on the y:axis.}
+\label{fig:graclus_cocit_fig}       % Give a unique label
 \end{figure}
-
 \newpage
 \clearpage
 \section*{Tables}
@@ -489,6 +427,45 @@ a^2+b^2=c^2
 \caption{Please write your figure caption here}
 \label{fig:2}       % Give a unique label
 \end{figure*}
+
+\begin{figure}[ht]
+\centering
+% Use the relevant command to insert your figure file.
+% For example, with the graphicx package use
+  \includegraphics[scale=0.25]{vlc.pdf}
+% figure caption is below the figure
+\caption{Schematic representation of variable clustering protocol modified from Small and Sweeney (1985) \cite{small_clustering_1985}. Three parameters are specified: (i) a threshold or starting level based on a quantile of normalized co-citation frequency, (ii) a level increment, and  (iii) a maximum cluster size. Input data is a set of co-cited publications with edge-weight defined by normalized co-citation frequencies. Green clusters are within the max cluster size. At the initial threshold, $t1$, a single cluster below the maximum cluster size, $mcs$ (green), along with one large cluster above it (red) are generated. As the threshold is incremented to $t2$, additional clusters of acceptable size is generated. The cascade continues to completion, which is defined by all clusters being of size less than or equal to the $mcs$. In this schematic, five rounds are adequate for the process to run to completion.}
+\label{fig:vlc_process}       % Give a unique label
+\end{figure}
+
+
+
+\begin{figure}[ht]
+\centering
+% Use the relevant command to insert your figure file.
+% For example, with the graphicx package use
+ \includegraphics[scale=0.5]{cocit_venn2.pdf}
+% figure caption is below the figure
+\caption{High-level disciplinary composition of publications in $\sim$2,000 clusters generated by variable-level clustering  of co-citation data.
+%Variable Level Clustering. 
+84,591 nodes from were matched to the 4 subject areas, 
+27 major subject areas, and 334 minor subject areas in the Scopus ASJC classification. Since 82.5\% of these nodes were assigned more to than one minor subject category, 
+we assigned fractional counts for the four subject areas that summed to 1 for each article. The figure shows a four way Venn Diagram~\cite{chen_venn_2011} illustrating the 
+relative frequencies of publications from the Physical Sciences, Social Sciences, Life Sciences, and Health Sciences.}
+\label{fig:cocitr_venn2}       % Give a unique label
+\end{figure}
+\newpage
+
+\begin{figure}[ht]
+\centering
+% Use the relevant command to insert your figure file.
+% For example, with the graphicx package use
+  \includegraphics[scale=0.5]{merge_select.pdf}
+% figure caption is below the figure
+\caption{Clustering produced using co-citation data; the y-axis is the cluster size (given logarithmically), and the x-axis is the number of iterations of the agglomerative clustering technique. Note that iterating more than 600 times produces a very large cluster.  }
+\label{fig:merge_select}       % Give a unique label
+\end{figure}
+
 %
 % For tables use
 
