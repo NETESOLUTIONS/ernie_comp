@@ -291,8 +291,7 @@ Each cluster is characterized by topics that label at least the required minimum
 \section*{Tables}
 
 \begin{table}[ht]
-\caption{\emph{denominator is 2090947 (some source ids got lost via inner joins and code restrictions) Statistics regarding the 20 clusters produced using direct citation. The \emph{comp} dataset 
-2685021 is because of inner joins on ASJC Explain conductance calculations~\cite{shun_parallel_2016}}}
+\caption{Characterization of the \emph{comp} dataset relative to Scopus ASJC minor subject areas.}
 \label{tab:comp}       
 \begin{tabular}{lrccc}
 \hline\noalign{\smallskip}
@@ -318,8 +317,8 @@ Computer Science (miscellaneous) & 0.9 \\
 \newpage
 
 \begin{table}[ht]
-\caption{\emph{Statistics regarding the 20 clusters produced using direct citation. The \emph{comp} dataset 
-2685021 is because of inner joins on ASJC Explain conductance calculations~\cite{shun_parallel_2016}}}
+\caption{Descriptive statistics of the 20 clusters produced from the \emph{dataset} using Graclus (direct citation).  The number of publications in each cluster, the conductance~\cite{shun_parallel_2016} of each cluster, the total number ASJC minor subject area labels assigned to publications in each cluster and the number of 
+unique labels in each cluster are shown}
 \label{tab:graclus}       
 \begin{tabular}{lrccc}
 \hline\noalign{\smallskip}
@@ -351,42 +350,11 @@ Cluster & Publications & Conductance & Total ASJC Labels & Unique ASJC Labels\\
 \newpage
 
 \begin{table}[ht]
-\caption{\emph{Co-citation Centroid}}
-\label{tab:centroid_reconcile}       
-\begin{tabular}{p{8 mm}p{42 mm}l}
-\hline\noalign{\smallskip}
-Cluster & Label & CC  \\
-\noalign{\smallskip}\hline
-18670 & Dynamical Systems & EEE (14)  \newline Control/Systems Eng (14) \\
-18892 & Operations Research & EEE (24) \\ 
-18918 & Image Processing & EEE (17)  \newline Software (17) \\ 
-18947 & Robotics & Software (12) \\ 
-18956 & Computer Vision & Comp Graphics and Comp-Aided Design (21)\\ 
-18972 & Software & Software (55) \\ 
-18974 & Applied Mathematics & Applied Mathematics (12)\\ 
-18983 & Optimization & EEE (35) \\ 
-18997 & Chaotic Systems & Control/Systems Eng (23)\\ 
-19008 & Hum Comp Interaction & Education (19)\\ 
-19009 & Artificial Intelligence & Computer Vision and Pattern Recognition (32)\\ 
-19013 & Security & Computer Science(all) (29)\\ 
-19026 & Architecture & EEE (35) \\ 
-19027 & Graph algorithms & Computer Networks and Communications (19)\\ 
-19030 & Databases & Software (19)\\ 
-19031 & Networks & EEE (32)\\ 
-19033 & Facial Recognition & Comp Vision and Pattern Recognition (18)\\ 
-19034 & Neurology & Neurology (12)\\ 
-19035 & Intelligent Systems & Artificial Intelligence (17)\\ 
-19036 & Comp Geometry & Software (10)\\ 
-\noalign{\smallskip}\hline
-\end{tabular}
-\end{table}
-
-\begin{table}[ht]
-\caption{\emph{Co-citation Centroid}}
+\caption{\emph{Nucleating Co-citations.} For each of the 20 co-citation clusters, the pair with the strongest edge (greatest normalized co-citation frequency) is shown below along with a manually assigned label}
 \label{tab:centroid}       
 \begin{tabular}{p{8 mm}p{42 mm}ll}
 \hline\noalign{\smallskip}
-Cluster & Nucleating Pair & NCF & Label \\
+Cluster & Nucleating Pair & NCF & Manual Label \\
 \noalign{\smallskip}\hline
 18670 & 10.1016/j.cam.2015.03.057 10.1016/j.sigpro.2015.10.009 & 0.92 & Dynamical Systems \\
 18892 & 10.1287/msom.1080.0228 10.1287/msom.1060.0190 & 0.72 & Operations Research\\ 
@@ -413,8 +381,36 @@ Cluster & Nucleating Pair & NCF & Label \\
 \end{table}
 \newpage
 
-
-
+\begin{table}[ht]
+\caption{\emph{Nucleating Co-citations} Manually assigned labels for nucleating co-cited pairs (Table~\ref{tab:centroid}) are matched to the ASJC minor subject area that constitutes the largest fraction (shown as percentage in parentheses) of all nodes in the cluster. In cases of ties, both minor subject areas are shown. Abbreviations: Electrical and Electronic Engineering (EEE); Control and Systems Engineering (CSE)}
+\label{tab:centroid_reconcile}       
+\begin{tabular}{p{8 mm}p{42 mm}l}
+\hline\noalign{\smallskip}
+Cluster & Label & Minor Subject Area \\
+\noalign{\smallskip}\hline
+18670 & Dynamical Systems & (i) EEE (14) (ii) CSE (14) \\
+18892 & Operations Research & EEE (24) \\ 
+18918 & Image Processing & (i) EEE (17) (ii) Software (17) \\ 
+18947 & Robotics & Software (12) \\ 
+18956 & Computer Vision & Computer Graphics and Computer-Aided Design (21)\\ 
+18972 & Software & Software (55) \\ 
+18974 & Applied Mathematics & Applied Mathematics (12)\\ 
+18983 & Optimization & EEE (35) \\ 
+18997 & Chaotic Systems & CSE (23)\\ 
+19008 & Hum Comp Interaction & Education (19)\\ 
+19009 & Artificial Intelligence & Computer Vision and Pattern Recognition (32)\\ 
+19013 & Security & Computer Science(all) (29)\\ 
+19026 & Architecture & EEE (35) \\ 
+19027 & Graph algorithms & Computer Networks and Communications (19)\\ 
+19030 & Databases & Software (19)\\ 
+19031 & Networks & EEE (32)\\ 
+19033 & Facial Recognition & Computer Vision and Pattern Recognition (18)\\ 
+19034 & Neurology & Neurology (12)\\ 
+19035 & Intelligent Systems & Artificial Intelligence (17)\\ 
+19036 & Comp Geometry & Software (10)\\ 
+\noalign{\smallskip}\hline
+\end{tabular}
+\end{table}
 \newpage
 
 %\begin{acknowledgements}
