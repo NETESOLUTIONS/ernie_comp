@@ -64,7 +64,7 @@ grestorew
 %
 \begin{document}
 
-\title{A Vignetted View of Computer Science through Citation Analysis}
+\title{Viewing Computer Science through Citation Analysis}
 %\thanks{Grants or other notes
 %about the article that should go on the front page should be
 %placed here. General acknowledgments should be placed at the end of the article.}
@@ -104,24 +104,11 @@ grestorew
 \maketitle
 
 \begin{abstract}
-Computer science has experienced dramatic growth and diversification over the last twenty years. Towards a current understanding of the structure of this discipline, we analyze a cohort of the computer science literature using the DBLP database.  For insight on the features of this cohort and the relationship within its components, we construct article level clusters based on either direct citations or co-citations, and reconcile them with major and minor subject categories in the All Science Journal Classification (Scopus). 
-Our study finds complementary insights can be gained by direct citation and co-citation, 
-and both point to the dramatic increase in computer science publications and scope.
-Our analyses show the emergence of new subfields, including ones that interact with external fields, such as the biological sciences, while some subfields
-have remained primarily inward looking.
-Thus,  the  division of computer science into three major subfields (hardware, software, and theory) observed by Salton and Bergmark 40 years ago is no longer
-an appropriate characterization of the computer science field. 
-
-\begin{itemize}
-\item understanding structure of communications within a field and with adjacent fields
-\item extending Salton and Bergmark and staying high-level
-\item combining article level and journal level 
-\item two clustering methods
-\item Graclus- all inclusive, unweighted edges
-\item Co-citations, highly selective and weighted edges
-\item intersection of Graclus and co-citation
-\item close out
-\end{itemize}
+Computer science has experienced dramatic growth and diversification over the last twenty years. Towards a current understanding of the structure of this discipline, we analyze 
+a cohort of the computer science literature using the DBLP database. For insight on the features of this cohort and the relationship within its components, we constructed article 
+level clusters based on either direct citations or co-citations, and reconcile them to major and minor subject categories in the All Science Journal Classification (ASJC). 
+We described complementary insights from clustering by direct citation and co-citation, and both point to the increase in computer science publications and their scope.
+Our analysis shows cross-category clusters, some that interact with external fields, such as the biological sciences, while others remain inward looking.
 
 \keywords{Bibliometrics \and Clustering \and Research Evaluation \and Computer Science \and DBLP}
 % \PACS{PACS code1 \and PACS code2 \and more}
@@ -134,9 +121,9 @@ an appropriate characterization of the computer science field.
 
 Computer science, and its applications, has experienced rapid growth and diversification over the last twenty years. As observed in a 2017 US National Academies Report, ``A wide range of jobs in virtually all sectors demand computing skills to an unprecedented extent. And every academic discipline finds itself incorporating computing into its research and educational mission"~\cite{nas_2017}. More recently, the collective influence of the Internet of Things (IoT), `big' data, accessible cloud computing, and advances in artificial intelligence have been postulated as a recent driver for growth and evolution~\cite{siebel2019_digital}. Given this powerful influence, some understanding of the present state and structure of computer science and its relationship to other fields could inform planning and policy making at multiple levels from national level funding all the way down to faculty hiring strategy.  
 
-In terms of historical precedent, Salton and Bergmark conducted a study  in 1979 of the computer science literature (419 computer articles published in 1974,  and 3,812 references cited in these articles)~\cite{salton_citation_1979}. Noting that that the scientific literature serves a rich source of information to study the structure and historical development of a field, these authors described the global structure of computer science as comprising three main areas: (i) theoretical foundations, such as theory of computation, (ii) hardware and computer systems, such as architecture,  and (iii) software, such as programming systems.  Related areas noted were (a) mathematics of computing, such as numerical analysis, (b) special software topics, such as operating systems, (c) data management and database systems, (d) methodologies valid for multiple applications, such as algebraic manipulation, (e) computer applications, such as computer graphics, and  (f) non-technical aspects, such as computer education. 
+In historical precedent, Salton and Bergmark conducted a study  in 1979 of the computer science literature (419 computer articles published in 1974,  and 3,812 references cited in these articles)~\cite{salton_citation_1979}. Noting that that the scientific literature serves a rich source of information to study the structure and historical development of a field, these authors described the global structure of computer science as comprising three main areas: (i) theoretical foundations, such as theory of computation, (ii) hardware and computer systems, such as architecture,  and (iii) software, such as programming systems.  Related areas noted were (a) mathematics of computing, such as numerical analysis, (b) special software topics, such as operating systems, (c) data management and database systems, (d) methodologies valid for multiple applications, such as algebraic manipulation, (e) computer applications, such as computer graphics, and  (f) non-technical aspects, such as computer education. 
 
-Looking beyond this historical triad of theoretical foundations, hardware and computer systems, and software, the Computing Classification System (CCS) published by the Association for Computing Machinery now consists of 13 top-level areas that reflect a more current view of the field~\cite{acm_ref}. This classification also addresses relationships with other fields under the category of Applied Computing. However, an easy way to map scientific publications to the CCS, especially interdisciplinary articles or those from proximal fields, does not seem to be available. 
+Looking beyond this historical triad of theoretical foundations, hardware and computer systems, and software, the Computing Classification System (CCS) published by the Association for Computing Machinery now consists of 13 top-level areas that reflect a more current view of the field~\cite{acm_ref}. This classification also addresses relationships with other fields under the category of Applied Computing. However, an easy way to map scientific publications to the CCS, especially interdisciplinary articles or those from proximal fields, does not seem to be available. [Need to add a few more citations].
 
 Other classification systems are available, such as the All Science Journal Classification (ASJC) developed and maintained by Scopus, the Web of Science research and categorical classifications from Clarivate Analytics, and the National Science Foundation classification system~\cite{nsf_classification,scopus_ref,wos_ref}. Scopus and the Web of Science also include comprehensive bibliographies with citation links and proprietary unique identifiers for publications. The Scopus All Science Journal Classification (ASJC), which we use in this study, is organized  into 4 subject areas, 27 major subject areas, and 334 minor subject areas. All three systems rely on applying one or more journal-derived labels to articles.  
 A logical prediction, given the diversity of articles within journals, is limited specificity at the article level. 
@@ -144,16 +131,16 @@ Shu and colleagues recently noted in a comparative study of the Chinese Science 
 Others have also discussed and critiqued disciplinary assignments using journal-based classifications~\cite{wang_large-scale_2016,perianes-rodriguez_comparison_2017}. 
 Article classification systems have been constructed that escape some of the criticisms of journal-based classification~\cite{traag_louvain_2019,boyack_classification_2014,waltman_new_2012}, but do not seem to presently enjoy widespread use. 
  
-In this study, we extend the work of Salton and Bergmark by combining article and journal approaches to study trends in computer science, while also considering connections to other fields, especially biology since approximately 42\% of Scopus is classified under the top level subject areas of Life Sciences and Health Sciences. As a source of computer  literature, we used DBLP, a reference bibliography for computer science~\cite{dblp_ref}. The DBLP bibliography covers publications from computer science and includes publications from hybrid fields, where they are considered pertinent to computer science research. We describe below the high-level interactions of computer science within the Physical Sciences, and with the Social Sciences, Life Sciences, and Health Sciences. 
+In this study, we extend the work of Salton and Bergmark through a combination of article and journal approaches to study trends in computer science, while also considering connections to other fields, especially biology since approximately 42\% of Scopus is classified under the top level subject areas of Life Sciences and Health Sciences. As a source of computer  literature, we used DBLP, a reference bibliography for computer science~\cite{dblp_ref}. The DBLP bibliography covers publications from computer science and includes publications from hybrid fields, where they are considered pertinent to computer science research. We describe below the high-level interactions of computer science within the Physical Sciences, and with the Social Sciences, Life Sciences, and Health Sciences. 
 
 \section{Materials and Methods}
 \label{sec:methods}
 
- \emph{Overview} For the purpose of this study, our working definition of the computer science literature is all publications in the DBLP bibliography that (i) had a digital object identifier (DOI), and (ii) could also be matched to article identifiers in the Scopus bibliography. The underlying assumption is that records in DBLP are greatly enriched for computer science even while recognizing that coverage may be incomplete and possibly biased. Cross-matching DBLP publications to records in the Scopus abstract and citation database of peer-reviewed literature enabled us to harvest the richer links in Scopus as well as extract links to publications from other disciplines. This cross-matching to Scopus also allows the use of both journal and article based classifications when clustering documents. Using both direct citations and co-citations as the basis for clustering, we used DBLP articles from journals and conference proceedings. We reconciled these clusters with the All Science Journal Classification (ASJC) developed and maintained by Scopus through a combination of automated and manual procedures, producing a dataset of  2,685,356 publications.
+ \emph{Overview} For the purpose of this study, our working definition of the computer science literature is all publications in the DBLP bibliography that (i) had a digital object identifier (DOI), and (ii) could also be matched to article identifiers in the Scopus bibliography. The underlying assumption is that records in DBLP are greatly enriched for computer science even while recognizing that coverage may be incomplete and possibly biased. Cross-matching DBLP publications to records in the Scopus abstract and citation database of peer-reviewed literature enabled us to harvest the richer links in Scopus as well as extract links to publications from other disciplines. This cross-matching to Scopus also allows the use of both journal and article based classifications when clustering documents. We used DBLP articles from journals and conference proceedings to construct article clusters by using either direct citations or co-citations as links. We reconciled these clusters with the All Science Journal Classification (ASJC) developed and maintained by Scopus through a combination of automated and manual procedures, producing a dataset of  2,685,356 publications.
 
 \emph{Data} A stable release of the DBLP computer science bibliography~\cite{dblp_ref} consisting of 7,079,994 records was downloaded as dblp-2018-08-01.xml.gz. 
 Slightly over 95\% of the publications within were published after 1996. 
-Publications were parsed from the XML source file and loaded into a PostgreSQL database. As part of implementing a larger data platform for research evaluation~\cite{GithubERNIE2019}, we have previously parsed the Scopus dataset, presently at over 87.8 million publications, into a custom schema in a PostgreSQL database. 
+Publications were parsed from the XML source file and loaded into a PostgreSQL database. As part of implementing a larger data platform for research evaluation~\cite{GithubERNIE2019}, we have previously parsed the Scopus dataset, presently at over 88 million publications, into a custom schema in a PostgreSQL database. 
 The total number of publications in Scopus labeled with major subject area Computer Science (in turn a subset of the Physical Sciences subject area) is 5,835,160. Records in the DBLP dataset were matched to Scopus identifiers using digital object identifiers (DOIs). This procedure resulted in a dataset of 2,685,356 DBLP publications with Scopus identifiers where 1,278,322 (47.6\%) were labeled as article and 1,407,034 (52.4\%) as conference proceedings.  References cited by these publications were then extracted from Scopus (7,129,006 records), resulting in a total of 8,000,411 
 publications and references. 
 We represented these data using a graph where the 8,000,411 nodes represent
@@ -184,7 +171,7 @@ Agglomerative clustering was then performed on these 10,298 clusters to generate
 \section*{Results}
 \label{sec:results}
 
- In our high-level study of the structure of a twenty year cohort of the computer science literature, we chose to use both traditional journal-based and article-based approaches. Considering that traditional disciplines `may only partly reflect the actual organization of today's scientific research'~\cite{waltman_new_2012}, we constructed article clusters at high levels of aggregation using citations to examine the  computer science literature and mapped these clusters to journal-based categories.
+ In our high-level study of the structure of a twenty year cohort of the computer science literature, we chose to use both traditional journal-based and article-based approaches. Considering that traditional disciplines `may only partly reflect the actual organization of today's scientific research'~\cite{waltman_new_2012}, we constructed article clusters at high levels of aggregation using citations to examine the  computer science literature and also mapped these clusters to journal-based categories to take advantage of both article level and journal level approaches.
 
 \emph{Data} The process of selection and matching resulted in a dataset of  publications (Materials and Methods). Of 4,291,130 DBLP publications with DOIs, only  2,685,356 had corresponding DOIs in Scopus. Of these roughly 2.68 million publications, approximately 2.07 million were assigned ASJC codes in Scopus corresponding to Computer Science (major subject area with 13 minor subject areas (Table~\ref{tab:comp}), with the balance of 610,000 publications non-exclusively shared between 26 different major subject areas ranging from Engineering (330,048) to Dentistry (Fig.~\ref{fig:ar_cp_annotation}). The set of 2.07 million publications classified under the major subject area Computer Science in Scopus spanned all 13 minor subject areas with Software at 30.3\%  being the largest component and Computer Science (miscellaneous) at 0.9\% the smallest. Publications in the \emph{comp} dataset labeled Theoretical Computer Science (409,082) are classified under the the major subject area of Mathematics rather than Computer Science (Table~\ref{tab:comp}). 
 
@@ -215,28 +202,19 @@ suggests that using the nucleating cluster as the basis for labeling co-citation
 To examine the correspondence between clusters generated by direct citation vs co-citation, we mapped the contents of these clusters to each other (Fig.~\ref{fig:graclus_cocit_fig}).
  At a threshold of 15\%, similar to other cross-matching, 90\% (18/20) of the co-cited clusters mapped to 1 or 2 direct citation clusters. This suggests that the majority of co-cited pairs tend to lie within the same cluster of publications linked by citations and,  by extension, tend towards disciplinarity rather than interdisciplinarity.
 
-\section{Discussion} Considering expansion and diversification of the field of computer science, we revisited its characterization in 1979~\cite{salton_citation_1979}. In comparison to Salton and Bergmark, we analyzed considerably more data, 2.68 million publications versus 391 by using two bibliographic databases, DBLP and Scopus, consisting of  7.1 million and 87.8 million publications respectively. By linking the two datasets to harvest citation and metadata, we were able to construct article level clusters in two different ways and reconcile these clusters with the Scopus ASJC classification, which provides a journal level perspective.
+\section{Discussion} Considering expansion and diversification of the field of computer science, we revisited its characterization in 1979~\cite{salton_citation_1979}. In comparison to Salton and Bergmark, we analyzed considerably more data, 2.68 million publications versus 391 by using two bibliographic databases, DBLP and Scopus, consisting of  approximately 7 million and 88 million publications respectively. By linking the two datasets to harvest citation and metadata, we were able to construct article level clusters in two different ways and reconcile these clusters with the Scopus ASJC classification, which provides a journal level perspective.
 
-Reconciling direct citation clusters to the Scopus ASJC classification yielded partially overlapping results that are consistent with the observation of Waltman and van Eck (2012)~\cite{waltman_new_2012} `that traditional disciplines such as those just mentioned only partly reflect the actual organization of today’s scientific research'. Of interest to us was the single obviously multidisciplinary cluster in which at least 15\% of its component publications were labeled with the ASJC minor subject areas Biochemistry, Chemistry, Computational Mathematics, Computational Theory and Mathematics, Computer Science Applications, Genetics, Molecular Biology, Statistics \& Probability. A second cluster mapped to Artificial Intelligence, Cognitive Neuroscience, and Neurology.  Both suggest collaboration between computer science and biology. At the opposite end of this spectrum is the perhaps more insular cluster that maps to Hardware and Architecture, Electrical and Electronic Engineering, and Software. These data suggest that, at least from the perspective of a high level of aggregation, some subfields within computer science may be primarily inward looking (remain concerned with fundamental questions in computer science and electrical engineering), while others are more actively engaged with fields external to computer science.   
+Reconciling direct citation clusters to the Scopus ASJC classification yielded partially overlapping results that are consistent with the observation of Waltman and van Eck (2012)~\cite{waltman_new_2012} `that traditional disciplines such as those just mentioned only partly reflect the actual organization of today’s scientific research'. Of interest to us was the single obviously multidisciplinary cluster in which at least 15\% of its component publications were labeled with the ASJC minor subject areas Biochemistry, Chemistry, Computational Mathematics, Computational Theory and Mathematics, Computer Science Applications, Genetics, Molecular Biology, Statistics \& Probability. A second cluster mapped to Artificial Intelligence, Cognitive Neuroscience, and Neurology.  Both suggest collaboration between computer science and biology. At the opposite end of this spectrum is the perhaps more insular cluster that maps to Hardware and Architecture, Electrical and Electronic Engineering, and Software. These data suggest that, at least from the perspective of a high level of aggregation, some subfields within computer science may be primarily inward looking (remain concerned with fundamental questions in computer science and electrical engineering), while others are more actively engaged with fields external to computer science. 
 
-%Analyzing clusters generated using co-citation links is more challenging. 
-A comparison of the clusters generated using direct citation and co-citation show interesting contrasts. 
-In some cases, 
-%The data suggest two co-existing patterns. One in which 
-the nodes in a co-citation cluster map largely to one or two direct citation clusters, but  in some other cases, the nodes in a co-citation cluster are taken from a large number of the direct citation clusters. 
-%The second, which may account for more than 50\% of the nodes in a co-citation cluster, is where the nodes in co-citation cluster are distributed across all 20 direct citation clusters. 
-The latter condition is intriguing in its implications of a web of co-citational links gluing the body of scientific literature together.
+A comparison of the clusters generated using direct citation and co-citation shows interesting contrasts. The nodes in a co-citation cluster often map largely to one or two direct citation clusters, for example. 98\% of the nodes in co-citation cluster 19008 map to direct citation cluster 8, which in turn aligns with theory, software, applications, and networks. Conversely, co- citation cluster 18947 nucleated by a pair of articles in the Journal of Applied Mathematics and Computation is distributed between direct clusters 11,16, and 17 effectively spanning Artificial Intelligence, Applied Mathematics, Biochemistry, Chemistry, Genetics, Theory, Software, Applications, and Statistics. 
 
-Overall we observed that in the 40 years since Salton and Bergmark's landmark paper,
- the field of computer science has not only expanded in volume, it has expanded in its interactions with other fields, and has
-also resulted in new subfields.
-%Significant interactions with the biological sciences in particular were observed, suggesting that computer science has been stimulated by
-%biology and also impacted biology. 
-The focus of this article was on high-level features, and a preference for simplicity and intuitiveness in the choice of methods.
-This preference may mitigate questions  regarding generalizability and the specific choices we made, such as the
- (i) use of the DBLP dataset and the efficiency of matching to Scopus, which may not capture all aspects of computer science and its interactions with other fields, (ii) the basis for clustering, and (iii) mapping the results of this clustering against a classification designed around journals rather than individual articles. 
-Future research should examine the growth and changes in the field of computer science to investigate the changes at a more detailed
-level.
+The focus of this article was on high-level features, and a preference for simplicity and intuitiveness in the choice of methods. This preference may address questions  regarding generalizability and the specific choices we made, such as the (i) use of the DBLP dataset matched to Scopus, which may not capture all aspects of computer science and its interactions with other fields, (ii) the basis for clustering, and (iii) mapping the results of this clustering against a classification designed around journals rather than individual articles. We believe that a journal level combined with article level approach is useful for studies of this kind.  
+
+We speculate that biology, often dominant in bibliometric studies, is restricted to two clusters on account of (i) the focus of DBLP (ii) our use of normalized co-citations (ii) the threshold set for detection. Future research should, of course, include complementary investigations at finer levels of granularity and sensitivity using article-level approaches that others have developed.
+
+In the 40 years since Salton and Bergmark's landmark paper, the field of computer science has not only expanded in volume, it has expanded in its interactions with other fields, and has
+also resulted in new disciplinary and interdisciplinary subfields. 
+
 \clearpage
 
 %%%%%%%%%
@@ -445,19 +423,16 @@ Cluster & Label & Minor Subject Area \\
 \end{table}
 \newpage
 
-%\begin{acknowledgements}
-%If you'd like to thank anyone, place your comments here
-%and remove the percent signs.
-%\end{acknowledgements}
-
+\begin{acknowledgements}
+Research and development reported in this publication was partially supported by funds from the National Institute on Drug Abuse, National Institutes of Health, US Department of Health and Human Services, under Contract No HHSN271201800040C (N44DA-18-1216). TW is supported by the Grainger Foundation.
+\end{acknowledgements}
 
 % Authors must disclose all relationships or interests that 
 % could have direct or potential influence or impart bias on 
 % the work: 
 %
-% \section*{Conflict of interest}
-%
-% The authors declare that they have no conflict of interest.
+ \section*{Conflict of interest}
+The authors declare that they have no conflicts of interest. Citation data used in this paper relied on Scopus (Elsevier Inc.) as implemented in the ERNIE project (Korobskiy et al., 2019), which is collaborative between NET ESolutions Corporation and Elsevier Inc. The content of this publication is solely the responsibility of the authors and does not necessarily represent the official views of the National Institutes of Health, NET ESolutions Corporation, or Elsevier Inc.
 
 
 % BibTeX users please use one of
