@@ -104,7 +104,13 @@ grestorew
 \maketitle
 
 \begin{abstract}
-Computer science has experienced dramatic growth and diversification over the last twenty years. Towards a current understanding of the structure of this discipline, we analyze a cohort of the computer science literature.  For insight on the features of this cohort and the relationship within its components, we construct article level clusters based on either direct citations or co-citations, and reconcile them with major and minor subject categories in the All Science Journal Classification (Scopus). [What do we find?].
+Computer science has experienced dramatic growth and diversification over the last twenty years. Towards a current understanding of the structure of this discipline, we analyze a cohort of the computer science literature using the DBLP database.  For insight on the features of this cohort and the relationship within its components, we construct article level clusters based on either direct citations or co-citations, and reconcile them with major and minor subject categories in the All Science Journal Classification (Scopus). 
+Our study finds complementary insights can be gained by direct citation and co-citation, 
+and both point to the dramatic increase in computer science publications and scope.
+Our analyses show the emergence of new subfields, including ones that interact with external fields, such as the biological sciences, while some subfields
+have remained primarily inward looking.
+Thus,  the  division of computer science into three major subfields (hardware, software, and theory) observed by Salton and Bergmark 40 years ago is no longer
+an appropriate characterization of the computer science field. 
 
 \begin{itemize}
 \item understanding structure of communications within a field and with adjacent fields
@@ -117,7 +123,7 @@ Computer science has experienced dramatic growth and diversification over the la
 \item close out
 \end{itemize}
 
-\keywords{Bibliometrics \and Clustering \and Research Evaluation \and Computer Science}
+\keywords{Bibliometrics \and Clustering \and Research Evaluation \and Computer Science \and DBLP}
 % \PACS{PACS code1 \and PACS code2 \and more}
 \subclass{01A85 \and 01A90} %\and more}
 
@@ -152,7 +158,7 @@ The total number of publications in Scopus labeled with major subject area Compu
 publications and references. 
 We represented these data using a graph where the 8,000,411 nodes represent
 publications and references  and the 44,296,381 undirected edges represent citations within the dataset. 
-We refer to these data as the  \emph{comp} dataset (Fig~\ref{fig:ar_cp_annotation}, Table~\ref{tab:comp}).  
+We refer to these data as the  \emph{comp} dataset (Fig.~\ref{fig:ar_cp_annotation}, Table~\ref{tab:comp}).  
  
 \emph{Clustering} Clustering of publications is commonly accomplished through direct citation, bibliographic coupling, and co-citation, with direct citation being proposed as as the best approach to concentrate citation links~\cite{klavans_which_2017}. Accordingly, we used direct citation links as the basis for cluster formation, and also co-citation to obtain an alternative view. In applying both clustering by direct citation and by co-citation, we attempted to consider, wherever possible, the criteria articulated by \v{S}ubelj, van Eck, and Waltman~\cite{subelj_clustering_2016} that (i) the largest cluster should be no more than 10 times the smallest one, (ii) small clusters should be eliminated, (iii) small changes and replicates should yield similar results (``stability"),  (iv) computing time should be minimized where possible, and (v) the clustering should seem reasonable on a qualitative level (``intuitive sensibility").
 
@@ -173,7 +179,7 @@ The frequency of these co-cited pairs was then computed across the \emph{comp} d
 
 We applied variable clustering with initial parameters as follows: the threshold  $t$  is initially set to  the median normalized co-citation frequency (quantile=0.5), increment $i = 0.1$, and maximum cluster size, $mcs=200$. Thus, at the start, all edges below the median normalized co-citation frequency were deleted. Clusters were formed by assembling connected components from each co-cited pair beginning with the heaviest edge weight. Clusters below size 100 were retained and any cluster larger than 200 nodes was carried over to the next round. The threshold, $t$, was then incremented by 0.1 and the process repeated while progressively incrementing $t$.  We used a bi-phasic approach where in which $t$ ranged from 0.5--0.9, after which $i$ was reduced to 0.01 for the range $0.9 \leq t \leq 0.99$. A final threshold of $t$=0.999 was applied to break the single remaining large cluster.  Using this approach, 22,232 clusters containing 84,591 nodes were generated, each containing less than 100 nodes. Clusters containing only two nodes were discarded, bringing the total number of clusters down to 10,298. The publications in these 10,298 clusters were overwhelmingly drawn from the Physical Sciences (one of the four top level categories in the Scopus ASJC classification), of which computer science is a sub-category (Fig.~\ref{fig:quad-chart}).
 
-Agglomerative clustering was then performed on these 10,298 clusters to generate higher-order clusters. To focus on larger clusters, only those with at least 10 nodes were used as input. Briefly, each cluster was now treated as a node and the edge weight between two clusters was assigned to the maximum edge weight of all edges between the nodes in the two clusters. Edges were arranged in descending order. The first pair of clusters was merged and its edge weight with other interacting clusters was recalculated, again based on maximum edge weight. All edges were then re-ordered as before and the next pair of clusters was merged. The process was halted after 600 rounds to prevent large outlier clusters being generated (Fig.~\ref{fig:quad-chart}, panel d).
+Agglomerative clustering was then performed on these 10,298 clusters to generate higher-order clusters. To focus on larger clusters, only those with at least 10 nodes were used as input. Briefly, each cluster was now treated as a node and the edge weight between two clusters was assigned to the maximum edge weight of all edges between the nodes in the two clusters. Edges were arranged in descending order. The first pair of clusters was merged and its edge weight with other interacting clusters was recalculated, again based on maximum edge weight. All edges were then re-ordered as before and the next pair of clusters was merged. The process was halted after 600 rounds to prevent large outlier clusters being generated (Fig.~\ref{fig:quad-chart}(d)).
 
 \section*{Results}
 \label{sec:results}
@@ -204,19 +210,33 @@ At the threshold of 15\%, only 17 of 20 co-citation clusters mapped to at least 
 
 Clustering by co-citation begins, for each cluster, with a pair of nodes that nucleates its subsequent formation. Thus, we also designated the pair of nodes in a cluster with the strongest edge as its nucleating pair and labeled the cluster by inspecting this pair of documents and assigning an intuitive label to it. These labels show high degree of correspondence  to the ASJC minor subject area that accounts for the largest fraction of the nodes in a co-citation cluster (Table~\ref{tab:centroid_reconcile}). 
 The extent of this correspondence %between the manually applied label and the ASJC minor subject area 
-suggests that using the nucleating cluster as the basis for labeling co-citation clusters (as we generated them) may be valid, although its usefulness is likely to vary according to the data being examined. We provide the DOIs of these nucleating pairs matched to manually assigned labels for independent review (Table~\ref{tab:centroid}.
+suggests that using the nucleating cluster as the basis for labeling co-citation clusters (as we generated them) may be valid, although its usefulness is likely to vary according to the data being examined. We provide the DOIs of these nucleating pairs matched to manually assigned labels for independent review (Table~\ref{tab:centroid}).
 
-To examine the correspondence between clusters generated by direct citation vs co-citation, we mapped the contents of these clusters to each other (Fig~\ref{fig:graclus_cocit_fig}).
+To examine the correspondence between clusters generated by direct citation vs co-citation, we mapped the contents of these clusters to each other (Fig.~\ref{fig:graclus_cocit_fig}).
  At a threshold of 15\%, similar to other cross-matching, 90\% (18/20) of the co-cited clusters mapped to 1 or 2 direct citation clusters. This suggests that the majority of co-cited pairs tend to lie within the same cluster of publications linked by citations and,  by extension, tend towards disciplinarity rather than interdisciplinarity.
 
 \section{Discussion} Considering expansion and diversification of the field of computer science, we revisited its characterization in 1979~\cite{salton_citation_1979}. In comparison to Salton and Bergmark, we analyzed considerably more data, 2.68 million publications versus 391 by using two bibliographic databases, DBLP and Scopus, consisting of  7.1 million and 87.8 million publications respectively. By linking the two datasets to harvest citation and metadata, we were able to construct article level clusters in two different ways and reconcile these clusters with the Scopus ASJC classification, which provides a journal level perspective.
 
 Reconciling direct citation clusters to the Scopus ASJC classification yielded partially overlapping results that are consistent with the observation of Waltman and van Eck (2012)~\cite{waltman_new_2012} `that traditional disciplines such as those just mentioned only partly reflect the actual organization of today’s scientific research'. Of interest to us was the single obviously multidisciplinary cluster in which at least 15\% of its component publications were labeled with the ASJC minor subject areas Biochemistry, Chemistry, Computational Mathematics, Computational Theory and Mathematics, Computer Science Applications, Genetics, Molecular Biology, Statistics \& Probability. A second cluster mapped to Artificial Intelligence, Cognitive Neuroscience, and Neurology.  Both suggest collaboration between computer science and biology. At the opposite end of this spectrum is the perhaps more insular cluster that maps to Hardware and Architecture, Electrical and Electronic Engineering, and Software. These data suggest that, at least from the perspective of a high level of aggregation, some subfields within computer science may be primarily inward looking (remain concerned with fundamental questions in computer science and electrical engineering), while others are more actively engaged with fields external to computer science.   
 
-Analyzing clusters generated using co-citation links is more challenging. The data suggest two co-existing patterns. One in which the nodes in a co-citation cluster map largely to one or two direct citation clusters. The second, which may account for more than 50\% of the nodes in a co-citation cluster, is where the nodes in co-citation cluster are distributed across all 20 direct citation clusters. The latter is intriguing in its implications of a web of such citational links gluing the body of scientific literature together.
+%Analyzing clusters generated using co-citation links is more challenging. 
+A comparison of the clusters generated using direct citation and co-citation show interesting contrasts. 
+In some cases, 
+%The data suggest two co-existing patterns. One in which 
+the nodes in a co-citation cluster map largely to one or two direct citation clusters, but  in some other cases, the nodes in a co-citation cluster are taken from a large number of the direct citation clusters. 
+%The second, which may account for more than 50\% of the nodes in a co-citation cluster, is where the nodes in co-citation cluster are distributed across all 20 direct citation clusters. 
+The latter condition is intriguing in its implications of a web of co-citational links gluing the body of scientific literature together.
 
-Reasonable critiques of our approach are: (i) use of the DBLP dataset and the efficiency of matching to Scopus, which may not capture all aspects of computer science and its interactions with other fields, (ii) the basis for clustering, and (iii) mapping the results of this clustering against a classification designed around journals rather than individual articles. Our focus on high-level features and a preference for simplicity and intuitiveness in our choice of methods may mitigate these concerns. 
-
+Overall we observed that in the 40 years since Salton and Bergmark's landmark paper,
+ the field of computer science has not only expanded in volume, it has expanded in its interactions with other fields, and has
+also resulted in new subfields.
+%Significant interactions with the biological sciences in particular were observed, suggesting that computer science has been stimulated by
+%biology and also impacted biology. 
+The focus of this article was on high-level features, and a preference for simplicity and intuitiveness in the choice of methods.
+This preference may mitigate questions  regarding generalizability and the specific choices we made, such as the
+ (i) use of the DBLP dataset and the efficiency of matching to Scopus, which may not capture all aspects of computer science and its interactions with other fields, (ii) the basis for clustering, and (iii) mapping the results of this clustering against a classification designed around journals rather than individual articles. 
+Future research should examine the growth and changes in the field of computer science to investigate the changes at a more detailed
+level.
 \clearpage
 
 %%%%%%%%%
@@ -247,18 +267,6 @@ Reasonable critiques of our approach are: (i) use of the DBLP dataset and the ef
 \newpage
 
 \begin{figure}[ht]
-% Use the relevant command to insert your figure file.
-% For example, with the graphicx package use
-  \includegraphics[scale=0.45]{scopus_dblp_graclus3.pdf}
-% figure caption is below the figure
-\caption{Heat map for the clustering obtained by direct citation. The  y-axis (rows) correspond to topics, defined by Scopus characterizations, and the
-x-axis (columns) represent the 20 different clusters.  
-Each cluster is characterized by topics that label at least 15\% of the publications in the cluster.
- }
-\label{fig:heatmap}       % Give a unique label
-\end{figure}
-
-\begin{figure}[ht]
 \centering
 \includegraphics[width=0.9\textwidth]{quad-chart-narrow.pdf}
 \caption{Co-citation analysis.
@@ -270,14 +278,29 @@ Each cluster is characterized by topics that label at least 15\% of the publicat
 \label{fig:quad-chart}
 \end{figure}
 
+\newpage
+
+\begin{figure}[ht]
+\centering
+% Use the relevant command to insert your figure file.
+% For example, with the graphicx package use
+  \includegraphics[scale=0.45]{scopus_dblp_graclus3.pdf}
+% figure caption is below the figure
+\caption{Heat map for the clustering obtained by direct citation. The  y-axis (rows) correspond to topics, defined by Scopus characterizations, and the
+x-axis (columns) represent the 20 different clusters.  
+Each cluster is characterized by topics that label at least 15\% of the publications in the cluster.
+ }
+\label{fig:heatmap}       % Give a unique label
+\end{figure}
 
 
 \newpage
 
 \begin{figure}[ht]
+\centering
 % Use the relevant command to insert your figure file.
 % For example, with the graphicx package use
-  \includegraphics[scale=0.45]{scopus_dblp_heatmap3.pdf}
+  \includegraphics[scale=0.5]{scopus_dblp_heatmap3.pdf}
 % figure caption is below the figure
 \caption{Heat map for the clustering obtained by co-citation, using two thresholds for inclusion (top: 15\%, bottom: 10\%). The  y-axis (rows) correspond to topics, defined by Scopus characterizations, and the
 x-axis (columns) represent the 20 different clusters.  
@@ -287,6 +310,7 @@ Each cluster is characterized by topics that label at least the required minimum
 \newpage
 
 \begin{figure}[ht]
+\centering
 % Use the relevant command to insert your figure file.
 % For example, with the graphicx package use
   \includegraphics[scale=0.45]{graclus_cocit_fig.pdf}
@@ -326,7 +350,7 @@ Computer Science (miscellaneous) & 0.9 \\
 
 \begin{table}[ht]
 \caption{Descriptive statistics of the 20 clusters produced from the \emph{dataset} using Graclus (direct citation).  The number of publications in each cluster, the conductance~\cite{shun_parallel_2016} of each cluster, the total number ASJC minor subject area labels assigned to publications in each cluster and the number of 
-unique labels in each cluster are shown}
+unique labels in each cluster are shown.}
 \label{tab:graclus}       
 \begin{tabular}{lrccc}
 \hline\noalign{\smallskip}
@@ -358,7 +382,7 @@ Cluster & Publications & Conductance & Total ASJC Labels & Unique ASJC Labels\\
 \newpage
 
 \begin{table}[ht]
-\caption{\emph{Nucleating Co-citations.} For each of the 20 co-citation clusters, the pair with the strongest edge (greatest normalized co-citation frequency) is shown below along with a manually assigned label}
+\caption{\emph{Nucleating Co-citations.} For each of the 20 co-citation clusters, the pair with the strongest edge (greatest normalized co-citation frequency) is shown below along with a manually assigned label.}
 \label{tab:centroid}       
 \begin{tabular}{p{8 mm}p{42 mm}ll}
 \hline\noalign{\smallskip}
@@ -390,7 +414,7 @@ Cluster & Nucleating Pair & NCF & Manual Label \\
 \newpage
 
 \begin{table}[ht]
-\caption{\emph{Nucleating Co-citations} Manually assigned labels for nucleating co-cited pairs (Table~\ref{tab:centroid}) are matched to the ASJC minor subject area that constitutes the largest fraction (shown as percentage in parentheses) of all nodes in the cluster. In cases of ties, both minor subject areas are shown. Abbreviations: Electrical and Electronic Engineering (EEE); Control and Systems Engineering (CSE)}
+\caption{\emph{Nucleating Co-citations} Manually assigned labels for nucleating co-cited pairs (Table~\ref{tab:centroid}) are matched to the ASJC minor subject area that constitutes the largest fraction (shown as percentage in parentheses) of all nodes in the cluster. In cases of ties, both minor subject areas are shown. Abbreviations: Electrical and Electronic Engineering (EEE); Control and Systems Engineering (CSE).}
 \label{tab:centroid_reconcile}       
 \begin{tabular}{p{8 mm}p{42 mm}l}
 \hline\noalign{\smallskip}
